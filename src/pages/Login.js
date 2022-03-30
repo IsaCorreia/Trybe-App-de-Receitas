@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import useFormValidatior from '../hooks/useFieldValidator';
-import useSaveToLocalStorage from '../hooks/useSaveToLocalStorage.js';
 
-const Login = () => {
+const Login = ({ history }) => {
   const { user,
     setUser,
     isButtonDisabled,
@@ -12,11 +11,17 @@ const Login = () => {
 
   useFormValidatior();
 
-  useSaveToLocalStorage([
+  const dataToBeStored = [
     ['mealsToken', 1],
     ['cocktailsToken', 1],
     ['email', email],
-  ]);
+  ];
+
+  const saveToLocalStorage = (data) => {
+    data.forEach((dataElement) => localStorage
+      .setItem(dataElement[0], dataElement[1]));
+    history.push('/foods');
+  };
 
   const handleInput = ({ target: { name, value } }) => {
     setUser({
@@ -47,18 +52,21 @@ const Login = () => {
           onChange={ handleInput }
         />
       </label>
-      <Link to="/foods">
-        <button
-          data-testid="login-submit-btn"
-          type="button"
-          disabled={ isButtonDisabled }
-        >
-          Enter
+      <button
+        data-testid="login-submit-btn"
+        type="button"
+        disabled={ isButtonDisabled }
+        onClick={ () => saveToLocalStorage(dataToBeStored) }
+      >
+        Enter
 
-        </button>
-      </Link>
+      </button>
     </form>
   );
+};
+
+Login.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
 };
 
 export default Login;
