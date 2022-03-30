@@ -1,7 +1,13 @@
 import React from 'react';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const FoodsExplorer = () => (
-  <h1>FoodsExplorer!</h1>
+  <>
+    <Header />
+    <h1>FoodsExplorer!</h1>
+    <Footer />
+  </>
 );
 
 export default FoodsExplorer;

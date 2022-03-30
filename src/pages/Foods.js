@@ -1,7 +1,13 @@
 import React from 'react';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Foods = () => (
-  <h1>Foods!</h1>
+  <>
+    <Header />
+    <h1>Foods!</h1>
+    <Footer />
+  </>
 );
 
 export default Foods;
