@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 
 function AppProvider({ children }) {
-  const [loginValues, setLoginValues] = useState({
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [user, setUser] = useState({
     email: '',
     password: '',
-    isButtonDisabled: true,
   });
 
   const contextValue = {
-    loginValues,
-    setLoginValues,
+    user,
+    setUser,
+    isButtonDisabled,
+    setIsButtonDisabled,
   };
 
   return (

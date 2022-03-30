@@ -1,37 +1,30 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import useFormValidatior from '../hooks/useFieldValidator';
 
 const Login = () => {
-  // const SIX = 6;
-  const { loginValues, setLoginValues } = useContext(AppContext);
+  const { user, setUser, isButtonDisabled } = useContext(AppContext);
 
-  // const validateFields = (email, password) => {
-  //   if (validator.isEmail(email) && password >= SIX) {
-  //     setLoginValues({
-  //       ...loginValues,
-  //       isButtonDisabled: false,
-  //     });
-  //   }
-  // };
+  useFormValidatior();
+
   const handleInput = ({ target: { name, value } }) => {
-    setLoginValues({
-      ...loginValues,
+    setUser({
+      ...user,
       [name]: value,
     });
-    // validateFields(loginValues.email, loginValues.password);
   };
 
   return (
 
-    <form className="input">
+    <form className="login-form">
       <label htmlFor="email">
         <input
           placeholder="e-mail"
           name="email"
           data-testid="email-input"
           type="email"
-          value={ loginValues.login }
+          value={ user.email }
           onChange={ handleInput }
         />
       </label>
@@ -41,7 +34,7 @@ const Login = () => {
           data-testid="password-input"
           type="password"
           name="password"
-          value={ loginValues.password }
+          value={ user.password }
           onChange={ handleInput }
         />
       </label>
@@ -49,7 +42,7 @@ const Login = () => {
         <button
           data-testid="login-submit-btn"
           type="button"
-          disabled={ loginValues.isButtonDisabled }
+          disabled={ isButtonDisabled }
         >
           Enter
 
@@ -58,5 +51,4 @@ const Login = () => {
     </form>
   );
 };
-
 export default Login;
