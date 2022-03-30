@@ -14,7 +14,7 @@ const Login = ({ history }) => {
   const dataToBeStored = [
     ['mealsToken', 1],
     ['cocktailsToken', 1],
-    ['email', email],
+    ['user', JSON.stringify({ email })],
   ];
 
   const saveToLocalStorage = (data) => {
