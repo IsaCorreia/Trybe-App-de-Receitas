@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 const FavoriteRecipes = () => (
   <>
-    <Header currentPage="Favorite Recipes" />
+    <Header currentPage="Favorite Recipes" disableSearch />
     <h1>FavoriteRecipes!</h1>
   </>
 );

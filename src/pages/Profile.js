@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 const Profile = () => (
   <>
-    <Header currentPage="Profile" />
+    <Header currentPage="Profile" disableSearch />
 
     <h1>Profile!</h1>
     <div style={ { display: 'flex', flexDirection: 'column', textAlign: 'center' } }>
