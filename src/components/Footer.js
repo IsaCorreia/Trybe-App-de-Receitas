@@ -33,7 +33,7 @@ const Footer = () => (
         </button>
       </Link>
 
-      <Link to="/explorer">
+      <Link to="/explore">
         <button type="button">
           <img src={ exploreIcon } alt="explore" />
         </button>
