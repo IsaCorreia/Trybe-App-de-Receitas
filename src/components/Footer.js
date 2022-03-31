@@ -6,8 +6,9 @@ import mealIcon from '../images/mealIcon.svg';
 
 const Footer = () => (
   <div
+    data-testid="footer"
     style={ {
-      position: 'absolute',
+      position: 'fixed',
       bottom: '0',
       width: '100%',
     } }
@@ -23,19 +24,19 @@ const Footer = () => (
     >
       <Link to="/foods">
         <button type="button">
-          <img src={ mealIcon } alt="meals" />
-        </button>
-      </Link>
-
-      <Link to="/drinks">
-        <button type="button">
-          <img src={ drinkIcon } alt="drinks" />
+          <img src={ mealIcon } alt="meals" data-testid="food-bottom-btn" />
         </button>
       </Link>
 
       <Link to="/explore">
         <button type="button">
-          <img src={ exploreIcon } alt="explore" />
+          <img src={ exploreIcon } alt="explore" data-testid="explore-bottom-btn" />
+        </button>
+      </Link>
+
+      <Link to="/drinks">
+        <button type="button">
+          <img src={ drinkIcon } alt="drinks" data-testid="drinks-bottom-btn" />
         </button>
       </Link>
     </div>
