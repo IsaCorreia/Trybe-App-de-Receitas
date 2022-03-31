@@ -3,11 +3,11 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import { DRINKS_ENDPOINT } from '../helpers/enpoints';
-import useFoodInitialRequest from '../hooks/useFoodInitialRequest';
+import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const Drinks = () => {
   const { setDrinksInitialRequest } = useContext(RecipesContext);
-  useFoodInitialRequest(DRINKS_ENDPOINT, setDrinksInitialRequest, 'drinks');
+  useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksInitialRequest, 'drinks');
   return (
     <>
       <Header currentPage="Drinks" />
