@@ -2,12 +2,12 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-const Foods = () => (
+const Drinks = () => (
   <>
-    <Header currentPage="Foods" />
-    <h1>Foods!</h1>
+    <Header currentPage="Drinks" />
+    <h1>Drinks!</h1>
     <Footer />
   </>
 );
 
-export default Foods;
+export default Drinks;
