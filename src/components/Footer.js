@@ -1,12 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import drinkIcon from '../images/drinkIcon.svg';
+import exploreIcon from '../images/exploreIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
 
 const Footer = () => (
   <>
-    <h1>Footer!</h1>
-    <Link to="/foods">ir para Foods</Link>
-    <Link to="/drinks">ir para Drinks</Link>
-    <Link to="/explorer">Explorar</Link>
+    <hr />
+    <Link to="/foods">
+      <button type="button">
+        <img src={ mealIcon } alt="meals" />
+      </button>
+    </Link>
+
+    <Link to="/drinks">
+      <button type="button">
+        <img src={ drinkIcon } alt="drinks" />
+      </button>
+    </Link>
+
+    <Link to="/explorer">
+      <button type="button">
+        <img src={ exploreIcon } alt="explore" />
+      </button>
+    </Link>
   </>
 );
 
