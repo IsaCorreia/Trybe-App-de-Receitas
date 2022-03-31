@@ -1,15 +1,15 @@
+import propTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-const Header = () => (
+const Header = ({ currentPage = 'Title' }) => (
   <>
-    <h1>Header!</h1>
     <button type="button">
-      <img data-testid="search-top-btn" src={ searchIcon } alt="seach" />
+      <img data-testid="search-top-btn" src={ searchIcon } alt="serach" />
     </button>
-    <span data-testid="page-title">Title(dinâmico de acordo com a página)</span>
+    <span data-testid="page-title">{currentPage}</span>
     <Link to="/profile">
       <button type="button">
         <img data-testid="profile-top-btn" src={ profileIcon } alt="profile" />
@@ -19,5 +19,9 @@ const Header = () => (
     <hr />
   </>
 );
+
+Header.propTypes = {
+  currentPage: propTypes.string.isRequired,
+};
 
 export default Header;
