@@ -4,7 +4,7 @@ import Header from '../components/Header';
 
 const Explorer = () => (
   <>
-    <Header />
+    <Header currentPage="Explore" />
     <h1>Explorer!</h1>
     <Footer />
   </>

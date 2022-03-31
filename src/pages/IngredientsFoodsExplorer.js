@@ -4,7 +4,7 @@ import Header from '../components/Header';
 
 const IngredientsFoodsExplorer = () => (
   <>
-    <Header />
+    <Header currentPage="Explore Ingredients" />
     <h1>IngredientsFoodsExplorer!</h1>
     <Footer />
   </>

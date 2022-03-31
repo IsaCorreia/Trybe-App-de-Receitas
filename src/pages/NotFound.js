@@ -4,7 +4,7 @@ import Header from '../components/Header';
 
 const NotFound = () => (
   <>
-    <Header />
+    <Header currentPage="Not Found" />
     <h1>NotFound!</h1>
     <Link to="/foods">Home</Link>
   </>

@@ -4,7 +4,7 @@ import Header from '../components/Header';
 
 const Drinks = () => (
   <>
-    <Header />
+    <Header currentPage="Drinks" />
     <h1>Drinks!</h1>
     <Footer />
   </>

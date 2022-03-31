@@ -5,13 +5,23 @@ import Header from '../components/Header';
 
 const Profile = () => (
   <>
-    <Header />
+    <Header currentPage="Profile" />
 
     <h1>Profile!</h1>
-    <span>Email</span>
-    <Link to="/favorite-recipes">FavoriteRecipes</Link>
-    <Link to="/done-recipes">DoneRecipes</Link>
-    <button type="button" onClick={ () => global.alert('Saiu') }>Logout</button>
+    <div style={ { display: 'flex', flexDirection: 'column', textAlign: 'center' } }>
+      <span>Email</span>
+      <Link to="/favorite-recipes">
+        <button type="button">FavoriteRecipes</button>
+      </Link>
+      <Link to="/done-recipes">
+        <button type="button">DoneRecipes</button>
+      </Link>
+      <Link to="/">
+        <button type="button" onClick={ () => global.alert('Saiu') }>
+          Logout
+        </button>
+      </Link>
+    </div>
 
     <Footer />
   </>

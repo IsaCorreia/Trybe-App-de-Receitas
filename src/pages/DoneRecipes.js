@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 const DoneRecipes = () => (
   <>
-    <Header />
+    <Header currentPage="Done Recipes" />
     <h1>DoneRecipes!</h1>
   </>
 );
