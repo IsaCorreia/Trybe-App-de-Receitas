@@ -9,17 +9,17 @@ import {
   DrinkDetail,
   DrinkDetailInProgress,
   Drinks,
-  DrinksExplorer,
-  Explorer,
+  DrinksExplore,
+  Explore,
   FavoriteRecipes,
   FoodDetail,
   FoodDetailInProgress,
   Foods,
-  FoodsExplorer,
-  IngredientsDrinksExplorer,
-  IngredientsFoodsExplorer,
+  FoodsExplore,
+  IngredientsDrinksExplore,
+  IngredientsFoodsExplore,
   Login,
-  NationalitiesFoodsExplorer,
+  NationalitiesFoodsExplore,
   NotFound,
   Profile,
 } from './pages';
@@ -36,7 +36,7 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
-          <Route exact path="/explorer" component={ Explorer } />
+          <Route exact path="/explore" component={ Explore } />
 
           {/* Páginas de detalhes: */}
           <Route exact path="/foods/:id" component={ FoodDetail } />
@@ -55,22 +55,22 @@ function App() {
           />
 
           {/* Páginas de explorar: */}
-          <Route exact path="/explorer/foods" component={ FoodsExplorer } />
-          <Route exact path="/explorer/drinks" component={ DrinksExplorer } />
+          <Route exact path="/explore/foods" component={ FoodsExplore } />
+          <Route exact path="/explore/drinks" component={ DrinksExplore } />
           <Route
             exact
-            path="/explorer/foods/ingredients"
-            component={ IngredientsFoodsExplorer }
+            path="/explore/foods/ingredients"
+            component={ IngredientsFoodsExplore }
           />
           <Route
             exact
-            path="/explorer/foods/nationalities"
-            component={ NationalitiesFoodsExplorer }
+            path="/explore/foods/nationalities"
+            component={ NationalitiesFoodsExplore }
           />
           <Route
             exact
-            path="/explorer/drinks/ingredients"
-            component={ IngredientsDrinksExplorer }
+            path="/explore/drinks/ingredients"
+            component={ IngredientsDrinksExplore }
           />
 
           {/* Página 404 */}
