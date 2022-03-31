@@ -39,18 +39,18 @@ function App() {
           <Route exact path="/explorer" component={ Explorer } />
 
           {/* Páginas de detalhes: */}
-          <Route exact path="/foods/{id}" component={ FoodDetail } />
-          <Route exact path="/drinks/{id}" component={ DrinkDetail } />
+          <Route exact path="/foods/:id" component={ FoodDetail } />
+          <Route exact path="/drinks/:id" component={ DrinkDetail } />
 
           {/* Páginas de receitas em progresso: */}
           <Route
             exact
-            path="/foods/{id}/in-progress"
+            path="/foods/:id/in-progress"
             component={ FoodDetailInProgress }
           />
           <Route
             exact
-            path="/drinks/{id}/in-progress"
+            path="/drinks/:id/in-progress"
             component={ DrinkDetailInProgress }
           />
 
