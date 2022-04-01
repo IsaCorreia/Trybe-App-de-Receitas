@@ -10,7 +10,7 @@ const Drinks = () => {
   useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksInitialRequest, 'drinks');
   return (
     <>
-      <Header currentPage="Drinks" />
+      <Header currentPage="Drinks" disableSearch={ false } />
       <h1>Drinks!</h1>
       <Footer />
     </>
