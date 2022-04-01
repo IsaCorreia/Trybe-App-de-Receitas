@@ -13,7 +13,9 @@ const Foods = () => {
   return (
     <>
       <Header currentPage="Foods" />
-      <ExploreRecipeCard info={ foodInitialRequest[0] } />
+      { foodInitialRequest.length > 0
+      && <ExploreRecipeCard info={ foodInitialRequest[0] } />}
+
       <h1>Foods!</h1>
       <Footer />
     </>
