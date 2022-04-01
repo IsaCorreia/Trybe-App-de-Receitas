@@ -1,12 +1,27 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import useFormValidatior from '../hooks/useFieldValidator';
 
-const Login = () => {
-  const { user, setUser, isButtonDisabled } = useContext(AppContext);
+const Login = ({ history }) => {
+  const { user,
+    setUser,
+    isButtonDisabled,
+    user: { email, password } } = useContext(AppContext);
 
   useFormValidatior();
+
+  const dataToBeStored = [
+    ['mealsToken', 1],
+    ['cocktailsToken', 1],
+    ['user', JSON.stringify({ email })],
+  ];
+
+  const saveToLocalStorage = (data) => {
+    data.forEach((dataElement) => localStorage
+      .setItem(dataElement[0], dataElement[1]));
+    history.push('/foods');
+  };
 
   const handleInput = ({ target: { name, value } }) => {
     setUser({
@@ -16,7 +31,6 @@ const Login = () => {
   };
 
   return (
-
     <form className="login-form">
       <label htmlFor="email">
         <input
@@ -24,7 +38,7 @@ const Login = () => {
           name="email"
           data-testid="email-input"
           type="email"
-          value={ user.email }
+          value={ email }
           onChange={ handleInput }
         />
       </label>
@@ -34,21 +48,25 @@ const Login = () => {
           data-testid="password-input"
           type="password"
           name="password"
-          value={ user.password }
+          value={ password }
           onChange={ handleInput }
         />
       </label>
-      <Link to="/foods">
-        <button
-          data-testid="login-submit-btn"
-          type="button"
-          disabled={ isButtonDisabled }
-        >
-          Enter
+      <button
+        data-testid="login-submit-btn"
+        type="button"
+        disabled={ isButtonDisabled }
+        onClick={ () => saveToLocalStorage(dataToBeStored) }
+      >
+        Enter
 
-        </button>
-      </Link>
+      </button>
     </form>
   );
 };
+
+Login.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};
+
 export default Login;
