@@ -2,19 +2,34 @@ import React, { useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
-import { MEALS_ENDPOINT } from '../helpers/enpoints';
+import { MEALS_ENDPOINT, MEALS_FILTER_ENDPOINT } from '../helpers/enpoints';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 import ExploreRecipeCard from '../components/ExploreRecipeCards';
 
 const Foods = () => {
-  const { setFoodInitialRequest, foodInitialRequest } = useContext(RecipesContext);
+  const NUMBER_OF_CARDS = 12;
+  const { setFoodInitialRequest,
+    foodInitialRequest,
+    setMealsFilterRequest } = useContext(RecipesContext);
 
   useRecipeInitialRequest(MEALS_ENDPOINT, setFoodInitialRequest, 'foods');
+  useRecipeInitialRequest(MEALS_FILTER_ENDPOINT, setMealsFilterRequest, 'meals');
+
   return (
     <>
       <Header currentPage="Foods" disableSearch={ false } />
       { foodInitialRequest.length > 0
-      && <ExploreRecipeCard info={ foodInitialRequest[0] } />}
+      && foodInitialRequest.slice(0, NUMBER_OF_CARDS)
+        .map((card, index) => (<ExploreRecipeCard
+          key={ index }
+          index={ index }
+          testidContainer={ `${index}-recipe-card` }
+          testidImg={ `${index}-recipe-img` }
+          testidName={ `${index}-recipe-name` }
+          src={ card.strMealThumb }
+          alt={ card.strMeal }
+
+        />)) }
 
       <Footer />
     </>

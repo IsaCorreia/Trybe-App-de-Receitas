@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
+  const [mealsFilterRequest, setMealsFilterRequest] = useState([]);
+  const [drinksFilterRequest, setDrinksFilterRequest] = useState([]);
   const [foodInitialRequest, setFoodInitialRequest] = useState([]);
   const [drinksInitialRequest, setDrinksInitialRequest] = useState([]);
   const recipesValues = {
@@ -10,6 +12,10 @@ function RecipesProvider({ children }) {
     setFoodInitialRequest,
     drinksInitialRequest,
     setDrinksInitialRequest,
+    mealsFilterRequest,
+    setMealsFilterRequest,
+    drinksFilterRequest,
+    setDrinksFilterRequest,
   };
 
   return (
