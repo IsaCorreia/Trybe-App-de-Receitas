@@ -4,3 +4,8 @@ form {
   flex-flow: column wrap;
   margin: 0 auto;
 }
+
+.card-thumb {
+  height: 100px;
+  width: 100px;
+}

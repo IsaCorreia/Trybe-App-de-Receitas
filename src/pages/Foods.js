@@ -12,11 +12,10 @@ const Foods = () => {
   useRecipeInitialRequest(MEALS_ENDPOINT, setFoodInitialRequest, 'foods');
   return (
     <>
-      <Header currentPage="Foods" />
+      <Header currentPage="Foods" disableSearch={ false } />
       { foodInitialRequest.length > 0
       && <ExploreRecipeCard info={ foodInitialRequest[0] } />}
 
-      <h1>Foods!</h1>
       <Footer />
     </>
   );
