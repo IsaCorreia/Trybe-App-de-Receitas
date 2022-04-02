@@ -22,6 +22,7 @@ const Drinks = () => {
       <Header currentPage="Drinks" disableSearch={ false } />
       { drinksFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter) => (
         <button
+          data-testid={ `${filter.strCategory}-category-filter` }
           key={ filter.strCategory }
           type="button"
         >
