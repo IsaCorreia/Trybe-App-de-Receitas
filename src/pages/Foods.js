@@ -18,7 +18,8 @@ const Foods = () => {
   return (
     <>
       <Header currentPage="Foods" disableSearch={ false } />
-      { foodInitialRequest.length > 0
+      <div className="card-display">
+        { foodInitialRequest.length > 0
       && foodInitialRequest.slice(0, NUMBER_OF_CARDS)
         .map((card, index) => (<ExploreRecipeCard
           key={ index }
@@ -27,10 +28,9 @@ const Foods = () => {
           testidImg={ `${index}-recipe-img` }
           testidName={ `${index}-recipe-name` }
           src={ card.strMealThumb }
-          alt={ card.strMeal }
-
+          mealName={ card.strMeal }
         />)) }
-
+      </div>
       <Footer />
     </>
   );
