@@ -5,32 +5,43 @@ import RecipesContext from '../context/RecipesContext';
 import { MEALS_ENDPOINT, MEALS_FILTER_ENDPOINT } from '../helpers/enpoints';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 import ExploreRecipeCard from '../components/ExploreRecipeCards';
+import useClearState from '../hooks/useClearState';
 
 const Foods = () => {
   const NUMBER_OF_CARDS = 12;
   const NUMBER_OF_FILTERS = 5;
-  const { setFoodInitialRequest,
-    foodInitialRequest,
+  const { setFoodRequest,
+    foodRequest,
     mealsFilterRequest,
-    setMealsFilterRequest } = useContext(RecipesContext);
+    setMealsFilterRequest,
+    currentFilter,
+    setCurrentFilter,
+  } = useContext(RecipesContext);
 
-  useRecipeInitialRequest(MEALS_ENDPOINT, setFoodInitialRequest, 'foods');
+  useRecipeInitialRequest(MEALS_ENDPOINT, setFoodRequest, 'foods');
   useRecipeInitialRequest(MEALS_FILTER_ENDPOINT, setMealsFilterRequest, 'meals');
+  useClearState();
+
+  const handleFilterClick = ({ target: { name } }) => (name === currentFilter
+    ? setCurrentFilter('All')
+    : setCurrentFilter(name));
 
   return (
     <>
       <Header currentPage="Foods" disableSearch={ false } />
-      { mealsFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter) => (
+      { mealsFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter, index) => (
         <button
+          name={ filter.strCategory }
           data-testid={ `${filter.strCategory}-category-filter` }
-          key={ filter.strCategoy }
+          key={ index }
           type="button"
+          onClick={ handleFilterClick }
         >
           { filter.strCategory }
         </button>))}
       <div className="card-display">
-        { foodInitialRequest.length > 0
-      && foodInitialRequest.slice(0, NUMBER_OF_CARDS)
+        { foodRequest.length > 0
+      && foodRequest.slice(0, NUMBER_OF_CARDS)
         .map((card, index) => (<ExploreRecipeCard
           key={ index }
           index={ index }

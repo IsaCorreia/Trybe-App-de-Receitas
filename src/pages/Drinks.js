@@ -4,33 +4,44 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import { DRINKS_ENDPOINT, DRINKS_FILTER_ENDPOINT } from '../helpers/enpoints';
+import useClearState from '../hooks/useClearState';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const Drinks = () => {
   const NUMBER_OF_CARDS = 12;
   const NUMBER_OF_FILTERS = 5;
-  const { setDrinksInitialRequest,
-    drinksInitialRequest,
+  const { setDrinksRequest,
+    drinksRequest,
     drinksFilterRequest,
-    setDrinksFilterRequest } = useContext(RecipesContext);
+    setDrinksFilterRequest,
+    setCurrentFilter,
+    currentFilter,
+  } = useContext(RecipesContext);
 
-  useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksInitialRequest, 'drinks');
+  useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksRequest, 'drinks');
   useRecipeInitialRequest(DRINKS_FILTER_ENDPOINT, setDrinksFilterRequest, 'drinks');
+  useClearState();
+
+  const handleFilterClick = ({ target: { name } }) => (name === currentFilter
+    ? setCurrentFilter('All')
+    : setCurrentFilter(name));
 
   return (
     <>
       <Header currentPage="Drinks" disableSearch={ false } />
-      { drinksFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter) => (
+      { drinksFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter, index) => (
         <button
+          name={ filter.strCategory }
           data-testid={ `${filter.strCategory}-category-filter` }
-          key={ filter.strCategory }
+          key={ index }
           type="button"
+          onClick={ handleFilterClick }
         >
           { filter.strCategory }
         </button>))}
       <div className="card-display">
-        { drinksInitialRequest.length > 0
-      && drinksInitialRequest.slice(0, NUMBER_OF_CARDS)
+        { drinksRequest.length > 0
+      && drinksRequest.slice(0, NUMBER_OF_CARDS)
         .map((card, index) => (<ExploreRecipeCard
           key={ index }
           index={ index }
