@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const ExploreRecipeCard = ({
   testidContainer,
   src,
-  mealName,
+  recipeName,
   testidImg,
   testidName,
 }) => (
@@ -15,17 +15,17 @@ const ExploreRecipeCard = ({
         data-testid={ testidImg }
         className="card-thumb"
         src={ src }
-        alt={ mealName }
+        alt={ recipeName }
       />
       <p data-testid={ testidName }>
-        { mealName }
+        { recipeName }
       </p>
     </div>
   </Link>);
 ExploreRecipeCard.propTypes = {
   testidContainer: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
-  mealName: PropTypes.string.isRequired,
+  recipeName: PropTypes.string.isRequired,
   testidImg: PropTypes.string.isRequired,
   testidName: PropTypes.string.isRequired,
 };

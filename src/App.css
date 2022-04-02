@@ -31,5 +31,6 @@ form {
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
+  margin-bottom: 30px;
 }
 

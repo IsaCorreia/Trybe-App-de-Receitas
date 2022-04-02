@@ -25,10 +25,10 @@ const Foods = () => {
           key={ index }
           index={ index }
           testidContainer={ `${index}-recipe-card` }
-          testidImg={ `${index}-recipe-img` }
-          testidName={ `${index}-recipe-name` }
+          testidImg={ `${index}-card-img` }
+          testidName={ `${index}-card-name` }
           src={ card.strMealThumb }
-          mealName={ card.strMeal }
+          recipeName={ card.strMeal }
         />)) }
       </div>
       <Footer />
