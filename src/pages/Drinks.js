@@ -8,7 +8,10 @@ import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const Drinks = () => {
   const NUMBER_OF_CARDS = 12;
-  const { setDrinksInitialRequest, drinksInitialRequest,
+  const NUMBER_OF_FILTERS = 5;
+  const { setDrinksInitialRequest,
+    drinksInitialRequest,
+    drinksFilterRequest,
     setDrinksFilterRequest } = useContext(RecipesContext);
 
   useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksInitialRequest, 'drinks');
@@ -17,6 +20,13 @@ const Drinks = () => {
   return (
     <>
       <Header currentPage="Drinks" disableSearch={ false } />
+      { drinksFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter) => (
+        <button
+          key={ filter.strCategory }
+          type="button"
+        >
+          { filter.strCategory }
+        </button>))}
       <div className="card-display">
         { drinksInitialRequest.length > 0
       && drinksInitialRequest.slice(0, NUMBER_OF_CARDS)

@@ -8,8 +8,10 @@ import ExploreRecipeCard from '../components/ExploreRecipeCards';
 
 const Foods = () => {
   const NUMBER_OF_CARDS = 12;
+  const NUMBER_OF_FILTERS = 5;
   const { setFoodInitialRequest,
     foodInitialRequest,
+    mealsFilterRequest,
     setMealsFilterRequest } = useContext(RecipesContext);
 
   useRecipeInitialRequest(MEALS_ENDPOINT, setFoodInitialRequest, 'foods');
@@ -18,6 +20,13 @@ const Foods = () => {
   return (
     <>
       <Header currentPage="Foods" disableSearch={ false } />
+      { mealsFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter) => (
+        <button
+          key={ filter.strCategoy }
+          type="button"
+        >
+          { filter.strCategory }
+        </button>))}
       <div className="card-display">
         { foodInitialRequest.length > 0
       && foodInitialRequest.slice(0, NUMBER_OF_CARDS)

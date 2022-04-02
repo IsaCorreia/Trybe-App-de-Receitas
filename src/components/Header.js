@@ -43,7 +43,7 @@ const Header = ({ currentPage, disableSearch }) => {
 
       { !disableSearchInput && <input type="text" data-testid="search-input" /> }
 
-      <button type="button">Filters</button>
+      {/* <button type="button">Filters</button>np */}
       <hr />
     </div>
   );
