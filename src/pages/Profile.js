@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -17,20 +17,17 @@ const Profile = ({ history }) => {
 
   return (
     <>
-      <Header currentPage="Profile" />
+      <Header currentPage="Profile" disableSearch />
       <h1>Profile!</h1>
       <div
-        style={ { display: 'flex',
+        style={ {
+          display: 'flex',
           flexDirection: 'column',
           textAlign: 'center',
-          alignItems: 'center' } }
+          alignItems: 'center',
+        } }
       >
-        <span
-          data-testid="profile-email"
-        >
-          { getLocalStorageEmail() }
-
-        </span>
+        <span data-testid="profile-email">{getLocalStorageEmail()}</span>
         <button
           type="button"
           data-testid="profile-favorite-btn"
@@ -44,7 +41,6 @@ const Profile = ({ history }) => {
           onClick={ () => history.push('/done-recipes') }
         >
           Done Recipes
-
         </button>
         <button
           type="button"
