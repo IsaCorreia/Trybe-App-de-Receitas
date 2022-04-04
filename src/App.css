@@ -1,3 +1,7 @@
+* {
+  text-decoration: none;
+}
+
 form {
   align-items: center;
   display: flex;
@@ -6,6 +10,27 @@ form {
 }
 
 .card-thumb {
+  border-radius: 15%;
   height: 100px;
   width: 100px;
 }
+
+.card-recipe {
+  color: black;
+  font-family: monospace;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.card-recipe p {
+  margin-top: 4px;
+}
+
+.card-display {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
