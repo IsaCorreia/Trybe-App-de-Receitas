@@ -10,9 +10,9 @@ form {
 }
 
 .card-thumb {
+  border-radius: 15%;
   height: 100px;
   width: 100px;
-  border-radius:15%;
 }
 
 .card-recipe {
@@ -28,8 +28,8 @@ form {
 }
 
 .card-display {
-  margin: 0 auto;
   display: flex;
+  margin: 0 auto;
   flex-flow: row wrap;
   margin-bottom: 30px;
 }
