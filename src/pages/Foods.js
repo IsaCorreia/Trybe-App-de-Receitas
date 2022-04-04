@@ -6,7 +6,7 @@ import { MEALS_ENDPOINT, MEALS_FILTER_ENDPOINT } from '../helpers/enpoints';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 import ExploreRecipeCard from '../components/ExploreRecipeCards';
 import useClearState from '../hooks/useClearState';
-import useFilterByCategory from '../hooks/useFilterByCategory';
+import useFoodByCategory from '../hooks/useFoodByCategory';
 
 const Foods = () => {
   const NUMBER_OF_CARDS = 12;
@@ -22,7 +22,7 @@ const Foods = () => {
   useClearState();
   useRecipeInitialRequest(MEALS_ENDPOINT, setFoodRequest, 'foods');
   useRecipeInitialRequest(MEALS_FILTER_ENDPOINT, setMealsFilterRequest, 'meals');
-  useFilterByCategory();
+  useFoodByCategory(MEALS_ENDPOINT, setFoodRequest, 'foods');
 
   const handleFilterClick = ({ target: { name } }) => (name === currentFilter
     ? setCurrentFilter('All')
@@ -31,6 +31,13 @@ const Foods = () => {
   return (
     <>
       <Header currentPage="Foods" disableSearch={ false } />
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        onClick={ () => setCurrentFilter('All') }
+      >
+        All
+      </button>
       { mealsFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter, index) => (
         <button
           name={ filter.strCategory }
@@ -42,7 +49,7 @@ const Foods = () => {
           { filter.strCategory }
         </button>))}
       <div className="card-display">
-        { foodRequest.length > 0
+        { foodRequest?.length > 0
       && foodRequest.slice(0, NUMBER_OF_CARDS)
         .map((card, index) => (<ExploreRecipeCard
           key={ index }

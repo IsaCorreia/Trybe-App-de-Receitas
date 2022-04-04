@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import { DRINKS_ENDPOINT, DRINKS_FILTER_ENDPOINT } from '../helpers/enpoints';
 import useClearState from '../hooks/useClearState';
+import useDrinksByCategory from '../hooks/useDrinkByCategory';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const Drinks = () => {
@@ -18,9 +19,10 @@ const Drinks = () => {
     currentFilter,
   } = useContext(RecipesContext);
 
+  useClearState();
   useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksRequest, 'drinks');
   useRecipeInitialRequest(DRINKS_FILTER_ENDPOINT, setDrinksFilterRequest, 'drinks');
-  useClearState();
+  useDrinksByCategory(DRINKS_ENDPOINT, setDrinksRequest, 'drinks');
 
   const handleFilterClick = ({ target: { name } }) => (name === currentFilter
     ? setCurrentFilter('All')
