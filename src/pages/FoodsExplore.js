@@ -1,12 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import RecipesContext from '../context/RecipesContext';
+import useRecipesInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const FoodsExplore = () => {
-  // Fazer requisição de meal aleatória
-  // Endpoint: https://www.themealdb.com/api/json/v1/1/random.php
-  const randomRecipeId = '1';
+  const { foodRequest, setFoodRequest } = useContext(RecipesContext);
+  const history = useHistory();
+
+  const RANDOM_ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  useRecipesInitialRequest(RANDOM_ENDPOINT, setFoodRequest, 'drinks');
+
+  const handleClick = () => {
+    const RANDOM_ID = foodRequest[0].idMeal;
+    history.push(`/foods/${RANDOM_ID}`);
+  };
   return (
     <>
       <Header currentPage="Explore Foods" disableSearch />
@@ -18,21 +27,30 @@ const FoodsExplore = () => {
         } }
       >
         <h1>FoodsExplore!</h1>
-        <Link to="/explore/foods/ingredients">
-          <button type="button" data-testid="explore-by-ingredient">
-            By Ingredient
-          </button>
-        </Link>
-        <Link to="/explore/foods/nationalities">
-          <button type="button" data-testid="explore-by-nationality">
-            By Nationality
-          </button>
-        </Link>
-        <Link to={ `/foods/${randomRecipeId}` }>
-          <button type="button" data-testid="explore-surprise">
-            Surprise me!
-          </button>
-        </Link>
+
+        <button
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => history.push('/explore/foods/ingredients') }
+        >
+          By Ingredient
+        </button>
+
+        <button
+          type="button"
+          data-testid="explore-by-nationality"
+          onClick={ () => history.push('/explore/foods/nationalities') }
+        >
+          By Nationality
+        </button>
+
+        <button
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleClick }
+        >
+          Surprise me!
+        </button>
       </div>
       <Footer />
     </>
