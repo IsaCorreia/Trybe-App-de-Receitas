@@ -6,6 +6,7 @@ import { MEALS_ENDPOINT, MEALS_FILTER_ENDPOINT } from '../helpers/enpoints';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 import ExploreRecipeCard from '../components/ExploreRecipeCards';
 import useClearState from '../hooks/useClearState';
+import useFilterByCategory from '../hooks/useFilterByCategory';
 
 const Foods = () => {
   const NUMBER_OF_CARDS = 12;
@@ -18,9 +19,10 @@ const Foods = () => {
     setCurrentFilter,
   } = useContext(RecipesContext);
 
+  useClearState();
   useRecipeInitialRequest(MEALS_ENDPOINT, setFoodRequest, 'foods');
   useRecipeInitialRequest(MEALS_FILTER_ENDPOINT, setMealsFilterRequest, 'meals');
-  useClearState();
+  useFilterByCategory();
 
   const handleFilterClick = ({ target: { name } }) => (name === currentFilter
     ? setCurrentFilter('All')
