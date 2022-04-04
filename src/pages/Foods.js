@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
+import ExploreRecipeCard from '../components/ExploreRecipeCards';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import SearchBar from '../components/SearchBar';
 import RecipesContext from '../context/RecipesContext';
 import { MEALS_ENDPOINT, MEALS_FILTER_ENDPOINT } from '../helpers/enpoints';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
-import ExploreRecipeCard from '../components/ExploreRecipeCards';
 import useClearState from '../hooks/useClearState';
 import useFoodByCategory from '../hooks/useFoodByCategory';
 
@@ -31,6 +32,7 @@ const Foods = () => {
   return (
     <>
       <Header currentPage="Foods" disableSearch={ false } />
+      <SearchBar />
       <button
         data-testid="All-category-filter"
         type="button"

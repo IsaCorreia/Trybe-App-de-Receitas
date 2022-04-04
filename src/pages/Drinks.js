@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import ExploreRecipeCard from '../components/ExploreRecipeCards';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import SearchBar from '../components/SearchBar';
 import RecipesContext from '../context/RecipesContext';
 import { DRINKS_ENDPOINT, DRINKS_FILTER_ENDPOINT } from '../helpers/enpoints';
 import useClearState from '../hooks/useClearState';
@@ -31,6 +32,8 @@ const Drinks = () => {
   return (
     <>
       <Header currentPage="Drinks" disableSearch={ false } />
+
+      <SearchBar />
       <button
         data-testid="All-category-filter"
         type="button"
@@ -62,6 +65,7 @@ const Drinks = () => {
           recipeName={ card.strDrink }
         />)) }
       </div>
+
       <Footer />
     </>
   );
