@@ -11,6 +11,7 @@ function AppProvider({ children }) {
 
   const [radioValue, setRadioValue] = useState('');
   const [inputSearchBarValue, setInputSearchBarValue] = useState('');
+  const [recipesAPI, setRecipesAPI] = useState([]);
 
   const contextValue = {
     user,
@@ -21,6 +22,8 @@ function AppProvider({ children }) {
     setRadioValue,
     inputSearchBarValue,
     setInputSearchBarValue,
+    recipesAPI,
+    setRecipesAPI,
   };
 
   return (

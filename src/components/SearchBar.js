@@ -1,33 +1,101 @@
 import React, { useContext } from 'react';
+// import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import {
   fetchFoodByFirstLetter,
   fetchFoodByIngredient,
   fetchFoodByName,
 } from '../services/fetchFoods';
+import {
+  fetchDrinkByIngredient,
+  fetchDrinkByName,
+  fetchDrinkByFirstLetter,
+} from '../services/fetchDrinks';
 
 function SearchBar() {
   const {
     radioValue,
     setRadioValue,
     inputSearchBarValue,
-    setInputSearchBarValue } = useContext(AppContext);
+    setInputSearchBarValue,
+    setRecipesAPI,
+  } = useContext(AppContext);
 
-  const fetchFoodsFromApi = async () => {
-    let recipe;
-    if (radioValue === 'ingredient') {
-      recipe = await fetchFoodByIngredient(inputSearchBarValue);
-    } else if (radioValue === 'name') {
-      recipe = await fetchFoodByName(inputSearchBarValue);
-    } else if (radioValue === 'firstLetter') {
-      recipe = await fetchFoodByFirstLetter(inputSearchBarValue);
+  // Redirecione para a tela de detalhes da receita
+  // caso apenas uma receita seja encontrada, com o ID da mesma na URL
+  // const redirectToDetailScreen = (recipes) => {
+  //   if (recipes.length === 1) {
+  //     history.push(`/foods/${recipes[0].idMeal}`);
+  //   } else {
+  //     history.push(`/drinks/${recipes[0].idDrink}`);
+  //   }
+  // };
+
+  //  Exiba um alert caso nenhuma receita seja encontrada
+
+  const verifyIfRecipeFound = (recipes) => {
+    if (!recipes) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
-    if (recipe === undefined) { console.log('aqui deu ruim'); }
   };
 
-  const handleClickButtonSearchBar = (e) => {
+  // função para retornar as comidas de acordo com o radio selecionado.
+  async function fetchFoodsFromApi() {
+    if (radioValue === 'ingredient') {
+      const recipes = await fetchFoodByIngredient(inputSearchBarValue);
+      setRecipesAPI(recipes);
+      verifyIfRecipeFound(recipes);
+    } else if (radioValue === 'name') {
+      const recipes = await fetchFoodByName(inputSearchBarValue);
+      setRecipesAPI(recipes);
+      verifyIfRecipeFound(recipes);
+    } else if (radioValue === 'firstLetter') {
+      if (inputSearchBarValue.length > 1) {
+        global.alert('Your search must have only 1 (one) character');
+      } else {
+        const recipes = await fetchFoodByFirstLetter(inputSearchBarValue);
+        setRecipesAPI(recipes);
+        verifyIfRecipeFound(recipes);
+      }
+    }
+  }
+
+  // função para retornar os drinks de acordo com o radio selecionado.
+
+  const fetchDrinksFromApi = async () => {
+    if (radioValue === 'ingredient') {
+      const recipes = await fetchDrinkByIngredient(inputSearchBarValue);
+      setRecipesAPI(recipes);
+      verifyIfRecipeFound(recipes);
+    }
+    if (radioValue === 'name') {
+      const recipes = await fetchDrinkByName(inputSearchBarValue);
+      setRecipesAPI(recipes);
+      verifyIfRecipeFound(recipes);
+    }
+    if (radioValue === 'firstLetter') {
+      if (inputSearchBarValue.length > 1) {
+        global.alert('Your search must have only 1 (one) character');
+      } else {
+        const recipes = await fetchDrinkByFirstLetter(inputSearchBarValue);
+        setRecipesAPI(recipes);
+        verifyIfRecipeFound(recipes);
+      }
+    }
+  };
+
+  // handle para controlar o clique do botão (Trazer foods se for foods, trazer drink se for drinks)
+
+  const handleClickButtonSearchBar = async (e) => {
     e.preventDefault();
-    console.log(fetchFoodsFromApi());
+    // window.location retirado https://www.samanthaming.com/tidbits/86-window-location-cheatsheet/
+    const actualURL = window.location.pathname;
+    if (actualURL === '/foods') {
+      await fetchFoodsFromApi();
+    }
+    if (actualURL === '/drinks') {
+      await fetchDrinksFromApi();
+    }
   };
 
   return (
@@ -81,5 +149,11 @@ function SearchBar() {
       </form>
     </div>);
 }
+
+// SearchBar.propTypes = {
+//   history: PropTypes.shape({
+//     push: PropTypes.func,
+//   }).isRequired,
+// };
 
 export default SearchBar;
