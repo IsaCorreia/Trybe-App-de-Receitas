@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 // import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import {
   fetchFoodByFirstLetter,
@@ -20,7 +19,6 @@ function SearchBar() {
     inputSearchBarValue,
     setInputSearchBarValue,
     setRecipesAPI,
-    recipesAPI,
   } = useContext(AppContext);
 
   // Redirecione para a tela de detalhes da receita
