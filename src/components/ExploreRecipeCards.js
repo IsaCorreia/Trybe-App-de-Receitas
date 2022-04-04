@@ -2,17 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const ExploreRecipeCard = ({ info }) => (
-  <Link to="/foods/1">
-    <div>
-      <img className="card-thumb" src={ info.strMealThumb } alt={ info.strMeal } />
-      <p>{ info.strMeal }</p>
-      Qualquer coisa
+const ExploreRecipeCard = ({
+  testidContainer,
+  src,
+  recipeName,
+  testidImg,
+  testidName,
+  linkTo,
+}) => (
+  <Link to={ linkTo }>
+    <div className="card-recipe" data-testid={ testidContainer }>
+      <img
+        data-testid={ testidImg }
+        className="card-thumb"
+        src={ src }
+        alt={ recipeName }
+      />
+      <p data-testid={ testidName }>
+        { recipeName }
+      </p>
     </div>
-  </Link>
-);
+  </Link>);
 ExploreRecipeCard.propTypes = {
-  info: PropTypes.shape([PropTypes.string]).isRequired,
+  testidContainer: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  recipeName: PropTypes.string.isRequired,
+  testidImg: PropTypes.string.isRequired,
+  testidName: PropTypes.string.isRequired,
+  linkTo: PropTypes.string.isRequired,
 };
 
 export default ExploreRecipeCard;
