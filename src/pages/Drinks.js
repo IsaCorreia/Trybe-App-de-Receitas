@@ -31,6 +31,13 @@ const Drinks = () => {
   return (
     <>
       <Header currentPage="Drinks" disableSearch={ false } />
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        onClick={ () => setCurrentFilter('All') }
+      >
+        All
+      </button>
       { drinksFilterRequest.slice(0, NUMBER_OF_FILTERS).map((filter, index) => (
         <button
           name={ filter.strCategory }
