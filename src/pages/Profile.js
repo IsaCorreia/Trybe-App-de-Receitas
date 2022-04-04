@@ -4,11 +4,12 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 const Profile = ({ history }) => {
+  // função que busca e-mail no localstorage.
   const getLocalStorageEmail = () => {
     const getUser = JSON.parse(localStorage.getItem('user'));
     return getUser.email;
   };
-
+  // função que redireciona o logout pra tela de login e limpa localStorage
   const redirectLogout = () => {
     localStorage.clear();
     history.push('/');
