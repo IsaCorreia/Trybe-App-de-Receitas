@@ -52,6 +52,7 @@ const Foods = () => {
         { foodRequest?.length > 0
       && foodRequest.slice(0, NUMBER_OF_CARDS)
         .map((card, index) => (<ExploreRecipeCard
+          linkTo={ `/foods/${card.idMeal}` }
           key={ index }
           index={ index }
           testidContainer={ `${index}-recipe-card` }

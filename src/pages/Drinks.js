@@ -52,6 +52,7 @@ const Drinks = () => {
         { drinksRequest.length > 0
       && drinksRequest.slice(0, NUMBER_OF_CARDS)
         .map((card, index) => (<ExploreRecipeCard
+          linkTo={ `/drinks/${card.idDrink}` }
           key={ index }
           index={ index }
           testidContainer={ `${index}-recipe-card` }

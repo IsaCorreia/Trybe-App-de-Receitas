@@ -8,8 +8,9 @@ const ExploreRecipeCard = ({
   recipeName,
   testidImg,
   testidName,
+  linkTo,
 }) => (
-  <Link to="/foods/1">
+  <Link to={ linkTo }>
     <div className="card-recipe" data-testid={ testidContainer }>
       <img
         data-testid={ testidImg }
@@ -28,6 +29,7 @@ ExploreRecipeCard.propTypes = {
   recipeName: PropTypes.string.isRequired,
   testidImg: PropTypes.string.isRequired,
   testidName: PropTypes.string.isRequired,
+  linkTo: PropTypes.string.isRequired,
 };
 
 export default ExploreRecipeCard;
