@@ -3,13 +3,22 @@ import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
-  const [foodInitialRequest, setFoodInitialRequest] = useState([]);
-  const [drinksInitialRequest, setDrinksInitialRequest] = useState([]);
+  const [currentFilter, setCurrentFilter] = useState('All');
+  const [mealsFilterRequest, setMealsFilterRequest] = useState([]);
+  const [drinksFilterRequest, setDrinksFilterRequest] = useState([]);
+  const [foodRequest, setFoodRequest] = useState([]);
+  const [drinksRequest, setDrinksRequest] = useState([]);
   const recipesValues = {
-    foodInitialRequest,
-    setFoodInitialRequest,
-    drinksInitialRequest,
-    setDrinksInitialRequest,
+    foodRequest,
+    setFoodRequest,
+    drinksRequest,
+    setDrinksRequest,
+    mealsFilterRequest,
+    setMealsFilterRequest,
+    drinksFilterRequest,
+    setDrinksFilterRequest,
+    currentFilter,
+    setCurrentFilter,
   };
 
   return (
