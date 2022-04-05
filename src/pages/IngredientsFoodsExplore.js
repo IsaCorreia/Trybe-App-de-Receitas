@@ -3,15 +3,17 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import IngredientCard from '../components/IngredientCard';
 import RecipesContext from '../context/RecipesContext';
+import {
+  MEALS_IMG_ENDPOINT_START as IMG_ENDPOINT,
+  MEALS_INGREDIENTS_ENDPOINT,
+} from '../helpers/enpoints';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const IngredientsFoodsExplore = () => {
   const { ingredientsRequest, setIngredientsRequest } = useContext(RecipesContext);
-  const INGREDIENTS_ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
-  const IMG_ENDPOINT_START = 'https://www.themealdb.com/images/ingredients/';
   const NUMBER_OF_CARDS = 12;
   useRecipeInitialRequest(
-    INGREDIENTS_ENDPOINT,
+    MEALS_INGREDIENTS_ENDPOINT,
     setIngredientsRequest,
     'ingredient',
   );
@@ -35,7 +37,8 @@ const IngredientsFoodsExplore = () => {
                 key={ index }
                 index={ index }
                 ingredientName={ strIngredient }
-                ingredientImage={ `${IMG_ENDPOINT_START}${strIngredient}-Small.png)` }
+                ingredientImage={ `${IMG_ENDPOINT}${strIngredient}-Small.png)` }
+                type="foods"
               />
             ))}
       </div>

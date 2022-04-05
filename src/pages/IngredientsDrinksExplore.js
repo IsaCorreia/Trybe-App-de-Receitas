@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import IngredientCard from '../components/IngredientCard';
 import RecipesContext from '../context/RecipesContext';
+import {
+  DRINKS_IMG_ENDPOINT_START as IMG_ENDPOINT,
+  DRINKS_INGREDIENTS_ENDPOINT,
+} from '../helpers/enpoints';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const IngredientsDrinksExplore = () => {
-  const {
-    // ingredientsRequest,
-    setIngredientsRequest,
-  } = useContext(RecipesContext);
-  const INGREDIENTS_ENDPOINT = 'www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
-  // const IMG_ENDPOINT_START = 'www.thecocktaildb.com/images/ingredients/';
-  // const NUMBER_OF_CARDS = 12;
+  const { ingredientsRequest, setIngredientsRequest } = useContext(RecipesContext);
+  const NUMBER_OF_CARDS = 12;
   useRecipeInitialRequest(
-    INGREDIENTS_ENDPOINT,
+    DRINKS_INGREDIENTS_ENDPOINT,
     setIngredientsRequest,
     'ingredient',
   );
@@ -29,7 +29,7 @@ const IngredientsDrinksExplore = () => {
       <Header currentPage="Explore Ingredients" disableSearch />
       <h1>IngredientsDrinksExplore!</h1>
       <div className="card-display">
-        {/* {ingredientsRequest
+        {ingredientsRequest
           && ingredientsRequest
             .slice(0, NUMBER_OF_CARDS)
             .map(({ strIngredient1 }, index) => (
@@ -37,9 +37,10 @@ const IngredientsDrinksExplore = () => {
                 key={ index }
                 index={ index }
                 ingredientName={ strIngredient1 }
-                ingredientImage={ `${IMG_ENDPOINT_START}${strIngredient1}-Small.png` }
+                ingredientImage={ `${IMG_ENDPOINT}${strIngredient1}-Small.png` }
+                type="drinks"
               />
-            ))} */}
+            ))}
       </div>
       <Footer />
     </div>
