@@ -1,10 +1,14 @@
 export const fetchDrinkByIngredient = async (ingredient) => {
   const URL_DRINK_ENDPOINT_BY_INGREDIENT = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
-  const response = await fetch(URL_DRINK_ENDPOINT_BY_INGREDIENT);
-  console.log(response);
-  const data = await response.json();
-  console.log(data);
-  return data.drinks;
+  try {
+    const response = await fetch(URL_DRINK_ENDPOINT_BY_INGREDIENT);
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    return data.drinks;
+  } catch (error) {
+    global.alert('Sorry, we haven\'t found any recipes for these filters.');
+  }
 };
 
 export const fetchDrinkByName = async (name) => {
