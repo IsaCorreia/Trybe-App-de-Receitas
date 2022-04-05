@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import {
   fetchFoodByFirstLetter,
@@ -11,25 +11,32 @@ import {
   fetchDrinkByName,
   fetchDrinkByFirstLetter,
 } from '../services/fetchDrinks';
+import RecipesContext from '../context/RecipesContext';
 
 function SearchBar() {
+  // https://felixgerschau.com/usehistory-react-hooks/ <- Explicação do useHistory;
+  const history = useHistory();
   const {
     radioValue,
     setRadioValue,
     inputSearchBarValue,
     setInputSearchBarValue,
+    recipesAPI,
     setRecipesAPI,
   } = useContext(AppContext);
+  const {
+    setFoodRequest,
+    setDrinksRequest,
+  } = useContext(RecipesContext);
 
-  // Redirecione para a tela de detalhes da receita
-  // caso apenas uma receita seja encontrada, com o ID da mesma na URL
-  // const redirectToDetailScreen = (recipes) => {
-  //   if (recipes.length === 1) {
-  //     history.push(`/foods/${recipes[0].idMeal}`);
-  //   } else {
-  //     history.push(`/drinks/${recipes[0].idDrink}`);
-  //   }
-  // };
+  // retornando true no estado caso apenas uma receita seja encontrada.
+  useEffect(() => {
+    if (recipesAPI?.length === 1 && recipesAPI[0].idMeal) {
+      history.push(`/foods/${recipesAPI[0].idMeal}`);
+    } if (recipesAPI?.length === 1 && recipesAPI[0].idDrink) {
+      history.push(`/drinks/${recipesAPI[0].idDrink}`);
+    }
+  }, [recipesAPI, history]);
 
   //  Exiba um alert caso nenhuma receita seja encontrada
 
@@ -41,45 +48,53 @@ function SearchBar() {
 
   // função para retornar as comidas de acordo com o radio selecionado.
   async function fetchFoodsFromApi() {
+    let recipes;
+
     if (radioValue === 'ingredient') {
-      const recipes = await fetchFoodByIngredient(inputSearchBarValue);
-      setRecipesAPI(recipes);
+      recipes = await fetchFoodByIngredient(inputSearchBarValue);
       verifyIfRecipeFound(recipes);
+      setRecipesAPI(recipes);
+      setFoodRequest(recipes);
     } else if (radioValue === 'name') {
-      const recipes = await fetchFoodByName(inputSearchBarValue);
-      setRecipesAPI(recipes);
+      recipes = await fetchFoodByName(inputSearchBarValue);
       verifyIfRecipeFound(recipes);
+      setRecipesAPI(recipes);
+      setFoodRequest(recipes);
     } else if (radioValue === 'firstLetter') {
       if (inputSearchBarValue.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        const recipes = await fetchFoodByFirstLetter(inputSearchBarValue);
-        setRecipesAPI(recipes);
+        recipes = await fetchFoodByFirstLetter(inputSearchBarValue);
         verifyIfRecipeFound(recipes);
+        setRecipesAPI(recipes);
+        setFoodRequest(recipes);
       }
     }
   }
 
   // função para retornar os drinks de acordo com o radio selecionado.
-
   const fetchDrinksFromApi = async () => {
+    let recipes;
     if (radioValue === 'ingredient') {
-      const recipes = await fetchDrinkByIngredient(inputSearchBarValue);
-      setRecipesAPI(recipes);
+      recipes = await fetchDrinkByIngredient(inputSearchBarValue);
       verifyIfRecipeFound(recipes);
+      setRecipesAPI(recipes);
+      setDrinksRequest(recipes);
     }
     if (radioValue === 'name') {
-      const recipes = await fetchDrinkByName(inputSearchBarValue);
-      setRecipesAPI(recipes);
+      recipes = await fetchDrinkByName(inputSearchBarValue);
       verifyIfRecipeFound(recipes);
+      setRecipesAPI(recipes);
+      setDrinksRequest(recipes);
     }
     if (radioValue === 'firstLetter') {
       if (inputSearchBarValue.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        const recipes = await fetchDrinkByFirstLetter(inputSearchBarValue);
-        setRecipesAPI(recipes);
+        recipes = await fetchDrinkByFirstLetter(inputSearchBarValue);
         verifyIfRecipeFound(recipes);
+        setRecipesAPI(recipes);
+        setDrinksRequest(recipes);
       }
     }
   };
@@ -149,11 +164,5 @@ function SearchBar() {
       </form>
     </div>);
 }
-
-// SearchBar.propTypes = {
-//   history: PropTypes.shape({
-//     push: PropTypes.func,
-//   }).isRequired,
-// };
 
 export default SearchBar;
