@@ -7,6 +7,7 @@ const Profile = ({ history }) => {
   // função que busca e-mail no localstorage.
   const getLocalStorageEmail = () => {
     const getUser = JSON.parse(localStorage.getItem('user'));
+    if (getUser === null) return 'Não está logado';
     return getUser.email;
   };
   // função que redireciona o logout pra tela de login e limpa localStorage
