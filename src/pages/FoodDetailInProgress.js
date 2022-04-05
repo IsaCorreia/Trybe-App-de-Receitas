@@ -10,12 +10,6 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
   const ID = pathname.slice(SEVEN, TWELVE);
   const { recipeDetails, setRecipeDetails } = useContext(RecipesContext);
 
-  // create an array with the ingredients and measure of each ingredient concatanating strIngredient and strMeasure
-
-  // const ingredients = Object.keys(recipeDetails[0]);
-
-  // console.log(ingredients);
-
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
 
   return (
@@ -31,7 +25,7 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
           />
           <h1
             data-testid="recipe-title"
-            className="display-6 text-center text-uppercase"
+            className="display-6 text-center text-uppercase mt-3"
           >
             {recipeDetails.strMeal}
           </h1>
@@ -50,9 +44,45 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
             Compartilhar
 
           </button>
+          <hr />
+          <div className="d-flex flex-column align-items-center mt-3">
+            {recipeDetails.ingredients.map((ingredient, index) => (
+              <label
+                className="text-muted text-lowercase"
+                key={ index }
+                htmlFor={ `ingredient-${index}` }
+              >
+                <input
+                  data-testid={ `${index}-ingredient-step` }
+                  className="ml-2 mr-2"
+                  name={ `ingredient-${index}` }
+                  type="checkbox"
+                />
+                { `${ingredient[0]}: ${ingredient[1]}` }
+              </label>
+            ))}
+          </div>
+          <hr />
+          <h3 className="text-center">Instructions</h3>
+          <div className="d-flex flex-row justify-content-center">
+            <div className="w-75">
+              <p className="text-muted text-left">{recipeDetails.strInstructions}</p>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center">
+            <button
+              className="btn btn-success btn btn-primary btn-lg mb-3"
+              type="button"
+              data-testid="finish-recipe-btn"
+            >
+              Finish Recipe
+
+            </button>
+          </div>
         </>
       )}
     </div>
+
   );
 };
 
