@@ -31,9 +31,9 @@ function SearchBar() {
 
   // retornando true no estado caso apenas uma receita seja encontrada.
   useEffect(() => {
-    if (recipesAPI.length === 1 && recipesAPI[0].idMeal) {
+    if (recipesAPI?.length === 1 && recipesAPI[0].idMeal) {
       history.push(`/foods/${recipesAPI[0].idMeal}`);
-    } if (recipesAPI.length === 1 && recipesAPI[0].idDrink) {
+    } if (recipesAPI?.length === 1 && recipesAPI[0].idDrink) {
       history.push(`/drinks/${recipesAPI[0].idDrink}`);
     }
   }, [recipesAPI, history]);
@@ -52,22 +52,22 @@ function SearchBar() {
 
     if (radioValue === 'ingredient') {
       recipes = await fetchFoodByIngredient(inputSearchBarValue);
+      verifyIfRecipeFound(recipes);
       setRecipesAPI(recipes);
       setFoodRequest(recipes);
-      verifyIfRecipeFound(recipes);
     } else if (radioValue === 'name') {
       recipes = await fetchFoodByName(inputSearchBarValue);
+      verifyIfRecipeFound(recipes);
       setRecipesAPI(recipes);
       setFoodRequest(recipes);
-      verifyIfRecipeFound(recipes);
     } else if (radioValue === 'firstLetter') {
       if (inputSearchBarValue.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
         recipes = await fetchFoodByFirstLetter(inputSearchBarValue);
+        verifyIfRecipeFound(recipes);
         setRecipesAPI(recipes);
         setFoodRequest(recipes);
-        verifyIfRecipeFound(recipes);
       }
     }
   }
@@ -77,26 +77,24 @@ function SearchBar() {
     let recipes;
     if (radioValue === 'ingredient') {
       recipes = await fetchDrinkByIngredient(inputSearchBarValue);
-      console.log('entrou aqui');
+      verifyIfRecipeFound(recipes);
       setRecipesAPI(recipes);
       setDrinksRequest(recipes);
-      verifyIfRecipeFound(recipes);
     }
     if (radioValue === 'name') {
       recipes = await fetchDrinkByName(inputSearchBarValue);
-      console.log('entrei aqui também');
+      verifyIfRecipeFound(recipes);
       setRecipesAPI(recipes);
       setDrinksRequest(recipes);
-      verifyIfRecipeFound(recipes);
     }
     if (radioValue === 'firstLetter') {
       if (inputSearchBarValue.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
         recipes = await fetchDrinkByFirstLetter(inputSearchBarValue);
+        verifyIfRecipeFound(recipes);
         setRecipesAPI(recipes);
         setDrinksRequest(recipes);
-        verifyIfRecipeFound(recipes);
       }
     }
   };
