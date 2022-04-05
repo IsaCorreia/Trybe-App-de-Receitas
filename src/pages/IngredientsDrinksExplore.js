@@ -5,7 +5,10 @@ import RecipesContext from '../context/RecipesContext';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const IngredientsDrinksExplore = () => {
-  const { ingredientsRequest, setIngredientsRequest } = useContext(RecipesContext);
+  const {
+    // ingredientsRequest,
+    setIngredientsRequest,
+  } = useContext(RecipesContext);
   const INGREDIENTS_ENDPOINT = 'www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
   // const IMG_ENDPOINT_START = 'www.thecocktaildb.com/images/ingredients/';
   // const NUMBER_OF_CARDS = 12;
