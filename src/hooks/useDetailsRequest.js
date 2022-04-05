@@ -10,8 +10,7 @@ const reduceIngredients = (ingredients) => {
         ingredient[curr[`strIngredient${i}`]] = curr[`strMeasure${i}`];
       }
     }
-    acc.push(ingredient);
-    return acc;
+    return Object.entries(ingredient);
   },
   []);
   return reducedIngredients;
