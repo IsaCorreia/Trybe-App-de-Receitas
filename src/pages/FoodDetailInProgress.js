@@ -45,7 +45,7 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
 
           </button>
           <hr />
-          <div className="d-flex flex-column align-items-center mt-3">
+          {/* <div className="d-flex flex-column align-items-center mt-3">
             {recipeDetails.ingredients.map((ingredient, index) => (
               <label
                 className="text-muted text-lowercase"
@@ -61,7 +61,7 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
                 { `${ingredient[0]}: ${ingredient[1]}` }
               </label>
             ))}
-          </div>
+          </div> */}
           <hr />
           <h3 className="text-center">Instructions</h3>
           <div className="d-flex flex-row justify-content-center">
