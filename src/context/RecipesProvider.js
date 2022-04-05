@@ -8,6 +8,7 @@ function RecipesProvider({ children }) {
   const [drinksFilterRequest, setDrinksFilterRequest] = useState([]);
   const [foodRequest, setFoodRequest] = useState([]);
   const [drinksRequest, setDrinksRequest] = useState([]);
+  const [foodDetail, setFoodDetail] = useState(null);
   const recipesValues = {
     foodRequest,
     setFoodRequest,
@@ -19,6 +20,8 @@ function RecipesProvider({ children }) {
     setDrinksFilterRequest,
     currentFilter,
     setCurrentFilter,
+    foodDetail,
+    setFoodDetail,
   };
 
   return (
