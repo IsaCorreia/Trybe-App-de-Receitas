@@ -28,8 +28,8 @@ const useDetailsRequest = (endpoint, setRecipe, recipe) => {
       const response = await fetch(endpoint);
       const data = await response.json();
       const detailsObject = {
-        ...data.meals[0],
-        ingredients: reduceIngredients(data.meals),
+        ...data[recipe][0],
+        ingredients: reduceIngredients(data[recipe]),
       };
       setRecipe(detailsObject);
     };

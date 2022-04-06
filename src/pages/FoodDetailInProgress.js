@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import { RECIPE_DETAILS_ENDPOINT } from '../helpers/enpoints';
 import useDetailsRequest from '../hooks/useDetailsRequest';
-import useSaveMeals from '../hooks/useSaveMeals';
+import useSaveRecipe from '../hooks/useSaveRecipe';
 
 const FoodDetailInProgress = ({ location: { pathname } }) => {
   const SEVEN = 7;
@@ -17,7 +17,7 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
     setStateIngredient } = useContext(RecipesContext);
 
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
-  useSaveMeals(ID, stateIngredient, setStateIngredient);
+  useSaveRecipe(ID, stateIngredient, setStateIngredient);
 
   const handleIngredient = ({ target: { name } }) => {
     if (stateIngredient.meals[ID] === undefined) {
@@ -57,17 +57,26 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
             {recipeDetails.strMeal}
           </h1>
           <p
+            data-testid="recipe-category"
             className="text-center text-muted text-lowercase"
           >
             {recipeDetails.strCategory}
           </p>
           <button
-            data-testid="favorite-btn"
+            data-testid="share-btn"
             type="button"
             className="btn btn-outline-info btn-lg btn-block"
             onClick={ () => console.log('compartilhou') }
           >
             Compartilhar
+          </button>
+          <button
+            data-testid="favorite-btn"
+            type="button"
+            className="btn btn-outline-info btn-lg btn-block"
+            onClick={ () => console.log('favoritou') }
+          >
+            Favoritar
           </button>
           <hr />
           <div className="d-flex flex-column align-items-center mt-3">
@@ -94,7 +103,13 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
           <h3 className="text-center">Instructions</h3>
           <div className="d-flex flex-row justify-content-center">
             <div className="w-75">
-              <p className="text-muted text-left">{recipeDetails.strInstructions}</p>
+              <p
+                data-testid="instructions"
+                className="text-muted text-left"
+              >
+                {recipeDetails.strInstructions}
+
+              </p>
             </div>
           </div>
           <div className="d-flex justify-content-center">

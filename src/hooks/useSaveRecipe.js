@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useSaveMeals = (ID, state, setState) => {
+const useSaveRecipe = (ID, state, setState) => {
   useEffect(() => {
     if (localStorage.getItem('inProgressRecipes')) {
       const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -13,4 +13,4 @@ const useSaveMeals = (ID, state, setState) => {
   }, [state, setState]);
 };
 
-export default useSaveMeals;
+export default useSaveRecipe;
