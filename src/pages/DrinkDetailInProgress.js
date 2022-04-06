@@ -28,6 +28,16 @@ const DrinksDetailInProgress = ({ location: { pathname } }) => {
           [ID]: [name],
         },
       });
+    } else if (stateIngredient.cocktails[ID].includes(name)) {
+      console.log('ja tem');
+      setStateIngredient({
+        ...stateIngredient,
+        cocktails: {
+          ...stateIngredient.cocktails,
+          [ID]: stateIngredient.cocktails[ID]
+            .filter((ingredientEl) => ingredientEl !== name),
+        },
+      });
     } else {
       setStateIngredient({
         ...stateIngredient,
