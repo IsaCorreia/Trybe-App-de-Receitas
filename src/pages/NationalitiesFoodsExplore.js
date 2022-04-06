@@ -12,10 +12,9 @@ const NationalitiesFoodsExplore = () => {
   const [nationalityFilter, setNationalityFilter] = useState('All');
   useRecipesInitialRequest(MEALS_ENDPOINT, setFoodRequest, 'foods');
 
-  const filteredRequest = nationalityFilter === 'All' ? foodRequest
-    .slice(0, NUMBER_OF_CARDS) : foodRequest
-    .slice(0, NUMBER_OF_CARDS)
-    .filter(({ strArea }) => (strArea === nationalityFilter));
+  const filteredRequest = nationalityFilter === 'All'
+    ? foodRequest
+    : foodRequest.filter(({ strArea }) => strArea === nationalityFilter);
 
   return (
     <>
@@ -35,6 +34,7 @@ const NationalitiesFoodsExplore = () => {
       <div className="card-display">
         {foodRequest?.length > 0
           && filteredRequest
+            .slice(0, NUMBER_OF_CARDS)
             .map((card, index) => (
               <ExploreRecipeCard
                 linkTo={ `/foods/${card.idMeal}` }
