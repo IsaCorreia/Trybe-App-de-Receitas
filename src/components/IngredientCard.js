@@ -3,11 +3,16 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import RecipesContext from '../context/RecipesContext';
+import { fetchDrinkByIngredient } from '../services/fetchDrinks';
 import { fetchFoodByIngredient } from '../services/fetchFoods';
 
 function IngredientCard({ index, ingredientName, ingredientImage, type }) {
   const { setRecipesAPI } = useContext(AppContext);
-  const { setFoodRequest } = useContext(RecipesContext);
+  const {
+    setFoodRequest,
+    setDrinksRequest,
+    setIsFilterByCategoryOn,
+  } = useContext(RecipesContext);
   const history = useHistory();
 
   const verifyIfRecipeFound = (recipes) => {
@@ -24,17 +29,19 @@ function IngredientCard({ index, ingredientName, ingredientImage, type }) {
       setRecipesAPI(recipes);
       setFoodRequest(recipes);
     }
+
+    if (type === 'drinks') {
+      recipes = await fetchDrinkByIngredient(ingredientName);
+      verifyIfRecipeFound(recipes);
+      setRecipesAPI(recipes);
+      setDrinksRequest(recipes);
+    }
+    setIsFilterByCategoryOn(false);
     history.push(`/${type}`, { from: `/explore/${type}/ingredients` });
   };
   return (
-    <div
-      data-testid={ `${index}-ingredient-card` }
-      className="card-recipe"
-    >
-      <button
-        type="button"
-        onClick={ handleClick }
-      >
+    <div data-testid={ `${index}-ingredient-card` } className="card-recipe">
+      <button type="button" onClick={ handleClick }>
         <img
           src={ ingredientImage }
           alt={ ingredientName }
