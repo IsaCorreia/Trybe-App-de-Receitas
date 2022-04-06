@@ -6,7 +6,6 @@ import shareIcon from '../images/shareIcon.svg';
 function DoneRecipeCard({ filterByType }) {
   // const [doneRecipesFromlocalStorage, setDoneRecipesFromLocalStorage] = useState([]);
   const [shareStatus, setShareStatus] = useState(false);
-
   const arrayDeTeste = [
     {
       id: '52771',
@@ -43,10 +42,6 @@ function DoneRecipeCard({ filterByType }) {
   // }, [setDoneRecipesFromLocalStorage]);
 
   // obs: TROCAR O ARRAY DE TESTE PELO OBJETO VINDO DO LOCAL STORAGE
-  // OBS: PARA REQUISITO 59 - Redirecione para a tela de detalhes
-  // da receita caso seja clicado na foto ou no nome da receita
-  // PENSEI EM USARMOS , mesmo conceito do OnClick do botão de compartilhar }>
-
   return (
     <div>
       {arrayDeTeste.length > 0
