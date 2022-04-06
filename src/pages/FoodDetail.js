@@ -31,8 +31,8 @@ const FoodDetail = ({
     <main>
       <div>
         <img src={ strMealThumb } alt={ strMeal } data-testid="recipe-photo" />
-        <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <h3 data-testid="recipe-category">{ strCategory }</h3>
+        <h1 data-testid="recipe-title">{strMeal}</h1>
+        <h3 data-testid="recipe-category">{strCategory}</h3>
       </div>
       <section>
         <h2>Ingtredients</h2>
@@ -42,19 +42,44 @@ const FoodDetail = ({
               key={ index }
               data-testid={ `${index}-ingredient-name-and-measure` }
             >
-              { value }
+              {value}
             </li>
           ))}
         </ol>
       </section>
       <section>
         <div data-testid="instructions">
+          <h2>Instructions</h2>
           {strInstructions}
         </div>
       </section>
-      <section data-testid="video">
-        {strYoutube}
+      <section>
+        <div>
+          <h2>Video</h2>
+        </div>
+        <iframe
+          src={ strYoutube.replace('whatch?v=', 'embed/') }
+          data-testid="video"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture
+          "
+          allowFullScreen
+        />
       </section>
+      <section>
+        <h2>Recommendations</h2>
+        {/* <div> */}
+        {/*   {TODO - Buscar cards Recommendations} */}
+        {/* </div> */}
+      </section>
+      {/* <StatrButton /> */}
     </main>
   );
 };
