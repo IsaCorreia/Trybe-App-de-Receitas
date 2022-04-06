@@ -8,7 +8,6 @@ export default function DoneRecipesCard() {
     <div>
       <div>
         <button
-          className="button-category"
           data-testid="filter-by-all-btn"
           type="button"
           onClick={ () => setFilterByType('') }
@@ -16,7 +15,6 @@ export default function DoneRecipesCard() {
           All
         </button>
         <button
-          className="button-category"
           data-testid="filter-by-food-btn"
           type="button"
           onClick={ () => setFilterByType('food') }
@@ -24,7 +22,6 @@ export default function DoneRecipesCard() {
           Food
         </button>
         <button
-          className="button-category"
           data-testid="filter-by-drink-btn"
           type="button"
           onClick={ () => setFilterByType('drink') }
