@@ -5,7 +5,7 @@ import { DRINKS_DETAILS_ENDPOINT } from '../helpers/enpoints';
 import useDetailsRequest from '../hooks/useDetailsRequest';
 import useSaveRecipe from '../hooks/useSaveRecipe';
 
-const FoodDetailInProgress = ({ location: { pathname } }) => {
+const DrinksDetailInProgress = ({ location: { pathname } }) => {
   const SEVEN = 8;
   const TWELVE = 13;
   const ID = pathname.slice(SEVEN, TWELVE);
@@ -129,9 +129,9 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
   );
 };
 
-FoodDetailInProgress.propTypes = {
+DrinksDetailInProgress.propTypes = {
   location: PropTypes.objectOf(PropTypes.any).isRequired,
 
 };
 
-export default FoodDetailInProgress;
+export default DrinksDetailInProgress;
