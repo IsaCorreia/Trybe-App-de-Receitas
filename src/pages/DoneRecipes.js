@@ -1,11 +1,38 @@
-import React from 'react';
-import Header from '../components/Header';
+import React, { useState } from 'react';
+import DoneRecipeCard from '../components/DoneRecipeCard';
 
-const DoneRecipes = () => (
-  <>
-    <Header currentPage="Done Recipes" disableSearch />
-    <h1>DoneRecipes!</h1>
-  </>
-);
+export default function DoneRecipesCard() {
+  const [filterByType, setFilterByType] = useState('');
 
-export default DoneRecipes;
+  return (
+    <div>
+      <div>
+        <button
+          className="button-category"
+          data-testid="filter-by-all-btn"
+          type="button"
+          onClick={ () => setFilterByType('') }
+        >
+          All
+        </button>
+        <button
+          className="button-category"
+          data-testid="filter-by-food-btn"
+          type="button"
+          onClick={ () => setFilterByType('food') }
+        >
+          Food
+        </button>
+        <button
+          className="button-category"
+          data-testid="filter-by-drink-btn"
+          type="button"
+          onClick={ () => setFilterByType('drink') }
+        >
+          Drinks
+        </button>
+      </div>
+      <DoneRecipeCard filterByType={ filterByType } />
+    </div>
+  );
+}
