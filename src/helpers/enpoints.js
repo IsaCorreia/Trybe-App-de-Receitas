@@ -6,5 +6,7 @@ export const MEALS_INGREDIENTS_ENDPOINT = 'https://www.themealdb.com/api/json/v1
 export const MEALS_IMG_ENDPOINT_START = 'https://www.themealdb.com/images/ingredients/';
 export const DRINKS_INGREDIENTS_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
 export const DRINKS_IMG_ENDPOINT_START = 'https://www.thecocktaildb.com/images/ingredients/';
+export const AREAS_ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 
+export const FILTER_BY_AREA_ENDPOINT = (area) => `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`;
 export const RECIPE_DETAILS_ENDPOINT = (id) => `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
