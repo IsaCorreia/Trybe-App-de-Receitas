@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import { RECIPE_DETAILS_ENDPOINT } from '../helpers/enpoints';
 import useDetailsRequest from '../hooks/useDetailsRequest';
+import useSaveInProgress from '../hooks/useSaveInProgressToState';
 
 const FoodDetailInProgress = ({ location: { pathname } }) => {
   const SEVEN = 7;
@@ -38,16 +39,17 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
     }
   };
 
-  useEffect(() => {
-    if (localStorage.getItem('inProgressRecipes')) {
-      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      setStateIngredient(inProgressRecipes);
-    }
-  }, [ID]);
+  useSaveInProgress(stateIngredient, ID);
+  // useEffect(() => {
+  //   if (localStorage.getItem('inProgressRecipes')) {
+  //     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //     setStateIngredient(inProgressRecipes);
+  //   }
+  // }, [ID]);
 
-  useEffect(() => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(stateIngredient));
-  }, [stateIngredient]);
+  // useEffect(() => {
+  //   localStorage.setItem('inProgressRecipes', JSON.stringify(stateIngredient));
+  // }, [stateIngredient]);
 
   return (
     <div>
