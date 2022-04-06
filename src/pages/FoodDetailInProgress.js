@@ -1,23 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import { RECIPE_DETAILS_ENDPOINT } from '../helpers/enpoints';
 import useDetailsRequest from '../hooks/useDetailsRequest';
-import useSaveInProgress from '../hooks/useSaveInProgressToState';
+import useSaveMeals from '../hooks/useSaveMeals';
 
 const FoodDetailInProgress = ({ location: { pathname } }) => {
   const SEVEN = 7;
   const TWELVE = 12;
   const ID = pathname.slice(SEVEN, TWELVE);
 
-  const { recipeDetails, setRecipeDetails } = useContext(RecipesContext);
-  const [stateIngredient, setStateIngredient] = useState({
-    cocktails: {},
-    meals: {
-      [ID]: [] },
-  });
+  const {
+    recipeDetails,
+    setRecipeDetails,
+    stateIngredient,
+    setStateIngredient } = useContext(RecipesContext);
 
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
+  useSaveMeals(ID, stateIngredient, setStateIngredient);
 
   const handleIngredient = ({ target: { name } }) => {
     if (stateIngredient.meals[ID] === undefined) {
@@ -38,18 +38,6 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
       });
     }
   };
-
-  useSaveInProgress(stateIngredient, ID);
-  // useEffect(() => {
-  //   if (localStorage.getItem('inProgressRecipes')) {
-  //     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //     setStateIngredient(inProgressRecipes);
-  //   }
-  // }, [ID]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('inProgressRecipes', JSON.stringify(stateIngredient));
-  // }, [stateIngredient]);
 
   return (
     <div>
@@ -94,7 +82,8 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
                   className="ml-2 mr-2"
                   name={ `${index + 1}` }
                   type="checkbox"
-                  checked={ stateIngredient.meals[ID].includes(`${index + 1}`) }
+                  checked={ stateIngredient.meals[ID]
+                    && stateIngredient.meals[ID].includes(`${index + 1}`) }
                   onChange={ (e) => handleIngredient(e) }
                 />
                 {`${Object.keys(ingredient)[0]} - ${Object.values(ingredient)[0]}`}
