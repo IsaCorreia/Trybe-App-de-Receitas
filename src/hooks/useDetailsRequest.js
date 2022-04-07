@@ -7,10 +7,16 @@ const reduceIngredients = (ingredients) => {
     const ingredient = {};
     for (let i = 1; i <= MAX_INGREDIENTS; i += 1) {
       if (curr[`strIngredient${i}`]) {
-        ingredient[curr[`strIngredient${i}`]] = curr[`strMeasure${i}`];
+        const INGREDIENT_STRING = `strIngredient${i}`;
+        const measure = curr[`strMeasure${i}`];
+
+        const ingredientName = curr[INGREDIENT_STRING];
+        ingredient[INGREDIENT_STRING] = {
+        };
+        ingredient[INGREDIENT_STRING][ingredientName] = measure;
       }
     }
-    return Object.entries(ingredient);
+    return ingredient;
   },
   []);
   return reducedIngredients;
@@ -19,11 +25,11 @@ const reduceIngredients = (ingredients) => {
 const useDetailsRequest = (endpoint, setRecipe, recipe) => {
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(endpoint);
-      const data = await response.json();
+      const data = await fetch(endpoint)
+        .then((res) => res.json());
       const detailsObject = {
-        ...data.meals[0],
-        ingredients: reduceIngredients(data.meals),
+        ...data[recipe][0],
+        ingredients: reduceIngredients(data[recipe]),
       };
       setRecipe(detailsObject);
     };
