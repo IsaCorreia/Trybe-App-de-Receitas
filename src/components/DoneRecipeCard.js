@@ -27,7 +27,7 @@ function DoneRecipeCard({ filterByType }) {
       name: 'Aquamarine',
       image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
       doneDate: '23/06/2020',
-      tags: ['Vodka', 'Teste'],
+      tags: ['Vodka'],
     },
   ];
 
@@ -48,15 +48,19 @@ function DoneRecipeCard({ filterByType }) {
       && arrayDeTeste
         .filter(({ type }) => type.includes(filterByType))
         .map((receita, index) => (
-          <div key={ index }>
+          <div key={ index } className="card-recipe">
             <Link to={ `/${receita.type}s/${receita.id}` }>
               <img
+                data-testid={ `${index}-horizontal-image` }
                 src={ receita.image }
                 alt={ receita.name }
-                data-testid={ `${index}-horizontal-image` }
+                style={ { width: '100px' } }
               />
             </Link>
-            <p data-testid={ `${index}-horizontal-top-text` }>{receita.category}</p>
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              {receita.type === 'food'
+                ? `${receita.nationality} - ${receita.category}` : receita.alcoholicOrNot}
+            </p>
             <Link to={ `/${receita.type}s/${receita.id}` }>
               <p data-testid={ `${index}-horizontal-name` }>{receita.name}</p>
             </Link>
@@ -75,11 +79,12 @@ function DoneRecipeCard({ filterByType }) {
               <img src={ shareIcon } alt="imagem do ícone" />
             </button>
             {shareStatus && <p>Link copied!</p>}
-            {receita.tags && receita.tags.map((tag, indexDasTags) => (
+            {receita.tags && receita.tags.map((tag) => (
               <p
-                data-testid={ `${indexDasTags}-${tag}-horizontal-tag` }
-                key={ indexDasTags }
+                data-testid={ `${index}-${tag}-horizontal-tag` }
+                key={ tag }
               >
+                {console.log(tag)}
                 {tag}
               </p>
             )) }
