@@ -38,7 +38,11 @@ form {
   height: 200px;
 }
 
-input[type-checkbox]:checked + label {
-  text-decoration: line-through !important;
-}
-
+input[type=checkbox] + label {
+  color: #ccc;
+  font-style: italic;
+} 
+input[type=checkbox]:checked + label {
+  color: #f00;
+  font-style: normal;
+} 
