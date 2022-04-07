@@ -31,8 +31,6 @@ const FoodDetail = ({
     strYoutube,
   } = foodDetail[0];
 
-  // const { strDrinkThumb, strAlcoholic, idDrink, strDrink } = recommendations[0];
-
   return (
     <main>
       <div>
