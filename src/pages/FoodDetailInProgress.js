@@ -9,8 +9,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import favoriteRecipe from '../helpers/favoriteRecipe';
 import finishRecipe from '../helpers/finishRecipe';
 import useVerifyCheckbox from '../hooks/useVerifyCheckbox';
-// import isFavorite from '../helpers/isFavorite';
-// import useCheckForFavorite from '../hooks/useCheckForFavorite';
+import useCheckForFavorite from '../hooks/useCheckForFavorite';
 
 const FoodDetailInProgress = (props) => {
   const { location: { pathname } } = props;
@@ -29,7 +28,7 @@ const FoodDetailInProgress = (props) => {
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
   useSaveRecipe(ID, stateIngredient, setStateIngredient);
   useVerifyCheckbox(setIsDoneButtonDisabled);
-  // useCheckForFavorite(ID, setFavorite, isFavorite);
+  useCheckForFavorite(ID, setIsFavorite);
 
   const handleIngredient = ({ target: { name } }) => {
     if (stateIngredient.meals[ID] === undefined) {
