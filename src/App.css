@@ -38,6 +38,6 @@ form {
   height: 200px;
 }
 
-.strikethrough:checked + span{
-  text-decoration:line-through
+.strikethrough:checked + span {
+  text-decoration: line-through;
 }
