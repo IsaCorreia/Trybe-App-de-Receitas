@@ -123,7 +123,9 @@ const DrinkDetailInProgress = (props) => {
                   && stateIngredient.cocktails[ID].includes(`${index + 1}`) }
                   onChange={ handleIngredient }
                 />
-                {`${Object.keys(ingredient)[0]} - ${Object.values(ingredient)[0]}`}
+                <span>
+                  {`${Object.keys(ingredient)[0]} - ${Object.values(ingredient)[0]}`}
+                </span>
               </label>
             ))}
           </div>

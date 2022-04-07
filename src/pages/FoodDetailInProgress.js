@@ -118,12 +118,15 @@ const FoodDetailInProgress = (props) => {
               >
                 <input
                   name={ `${index + 1}` }
+                  className="strikethrough"
                   type="checkbox"
                   checked={ stateIngredient.meals[ID]
                     && stateIngredient.meals[ID].includes(`${index + 1}`) }
                   onChange={ (e) => handleIngredient(e) }
                 />
-                {`${Object.keys(ingredient)[0]} - ${Object.values(ingredient)[0]}`}
+                <span>
+                  {`${Object.keys(ingredient)[0]} - ${Object.values(ingredient)[0]}`}
+                </span>
               </label>
             ))}
           </div>
