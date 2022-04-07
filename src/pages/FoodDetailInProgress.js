@@ -26,8 +26,6 @@ const FoodDetailInProgress = (props) => {
     stateIngredient,
     setStateIngredient } = useContext(RecipesContext);
 
-  console.log(objectConstructor('food', recipeDetails));
-
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
   useSaveRecipe(ID, stateIngredient, setStateIngredient);
   useVerifyCheckbox(setIsDoneButtonDisabled);
@@ -105,7 +103,7 @@ const FoodDetailInProgress = (props) => {
           >
             <img
               src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-              alt="favorite"
+              alt="lala"
             />
           </button>
           <hr />
