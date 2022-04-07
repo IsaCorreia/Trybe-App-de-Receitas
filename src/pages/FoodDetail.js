@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 import RecipeContext from '../context/RecipesContext';
 import reducerRecipeDetail from '../helpers/reduceRecipeDetails';
+import Card from '../components/Card';
 
 const FoodDetail = ({
   match: {
@@ -10,10 +11,13 @@ const FoodDetail = ({
   },
 }) => {
   const FOOD_DETAILS_URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-
+  const DRINKS_RECOMMENDATIONS = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  const MAX_RECOMMENDATIONS = 6;
   const { foodDetail, setFoodDetail } = useContext(RecipeContext);
+  const { recommendations, setRecommendations } = useContext(RecipeContext);
 
   useRecipeInitialRequest(FOOD_DETAILS_URL, setFoodDetail, 'meals');
+  useRecipeInitialRequest(DRINKS_RECOMMENDATIONS, setRecommendations, 'drinks');
 
   if (!foodDetail) {
     return <p>Loading...</p>;
@@ -26,6 +30,8 @@ const FoodDetail = ({
     strInstructions,
     strYoutube,
   } = foodDetail[0];
+
+  // const { strDrinkThumb, strAlcoholic, idDrink, strDrink } = recommendations[0];
 
   return (
     <main>
@@ -75,11 +81,27 @@ const FoodDetail = ({
       </section>
       <section>
         <h2>Recommendations</h2>
-        {/* <div> */}
-        {/*   {TODO - Buscar cards Recommendations} */}
-        {/* </div> */}
+        <div>
+          {recommendations
+            ?.slice(0, MAX_RECOMMENDATIONS)
+            .map(
+              ({ strDrinkThumb, strAlcoholic, idDrink, strDrink }, index) => (
+                <Card
+                  key={ idDrink }
+                  index={ index }
+                  src={ strDrinkThumb }
+                  name={ strDrink }
+                  strType={ strAlcoholic }
+                  dataTestId={ {
+                    container: '-recommendation-card',
+                    paragraph: '-recommendation-title',
+                  } }
+                />
+              ),
+            )}
+        </div>
       </section>
-      {/* <StatrButton /> */}
+      {/* TODO: <StatrButton /> */}
     </main>
   );
 };
