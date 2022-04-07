@@ -10,14 +10,13 @@ const FoodDetailInProgress = (props) => {
   const { location: { pathname } } = props;
   const { history } = props;
   const ID = pathname.replace(/\D/g, '');
+  const [isDoneButtonDisabled, setIsDoneButtonDisabled] = useState(true);
 
   const {
     recipeDetails,
     setRecipeDetails,
     stateIngredient,
     setStateIngredient } = useContext(RecipesContext);
-
-  const [isDoneButtonDisabled, setIsDoneButtonDisabled] = useState(true);
 
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
   useSaveRecipe(ID, stateIngredient, setStateIngredient);
