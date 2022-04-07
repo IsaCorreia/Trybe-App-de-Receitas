@@ -10,6 +10,7 @@ import favoriteRecipe from '../helpers/favoriteRecipe';
 import finishRecipe from '../helpers/finishRecipe';
 import useVerifyCheckbox from '../hooks/useVerifyCheckbox';
 import useCheckForFavorite from '../hooks/useCheckForFavorite';
+import objectConstructor from '../helpers/objectConstructor';
 
 const DrinkDetailInProgress = (props) => {
   const { location: { pathname } } = props;
@@ -60,7 +61,7 @@ const DrinkDetailInProgress = (props) => {
   };
 
   const handleFavorite = () => {
-    const teste = favoriteRecipe(ID);
+    const teste = favoriteRecipe(objectConstructor('drink', recipeDetails), ID);
     setIsFavorite(teste);
   };
 
@@ -146,7 +147,8 @@ const DrinkDetailInProgress = (props) => {
               type="button"
               data-testid="finish-recipe-btn"
               disabled={ isDoneButtonDisabled }
-              onClick={ () => finishRecipe(ID, history) }
+              onClick={ () => finishRecipe(ID, history,
+                objectConstructor('drink', recipeDetails)) }
             >
               Finish Recipe
 

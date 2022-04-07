@@ -10,6 +10,7 @@ import favoriteRecipe from '../helpers/favoriteRecipe';
 import finishRecipe from '../helpers/finishRecipe';
 import useVerifyCheckbox from '../hooks/useVerifyCheckbox';
 import useCheckForFavorite from '../hooks/useCheckForFavorite';
+import objectConstructor from '../helpers/objectConstructor';
 
 const FoodDetailInProgress = (props) => {
   const { location: { pathname } } = props;
@@ -24,6 +25,8 @@ const FoodDetailInProgress = (props) => {
     setRecipeDetails,
     stateIngredient,
     setStateIngredient } = useContext(RecipesContext);
+
+  console.log(objectConstructor('food', recipeDetails));
 
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
   useSaveRecipe(ID, stateIngredient, setStateIngredient);
@@ -59,7 +62,7 @@ const FoodDetailInProgress = (props) => {
   };
 
   const handleFavorite = () => {
-    const teste = favoriteRecipe(ID);
+    const teste = favoriteRecipe(objectConstructor('food', recipeDetails), ID);
     setIsFavorite(teste);
   };
 
@@ -143,7 +146,8 @@ const FoodDetailInProgress = (props) => {
               type="button"
               data-testid="finish-recipe-btn"
               disabled={ isDoneButtonDisabled }
-              onClick={ () => finishRecipe(ID, history) }
+              onClick={ () => finishRecipe(ID, history,
+                objectConstructor('food', recipeDetails)) }
             >
               Finish Recipe
             </button>

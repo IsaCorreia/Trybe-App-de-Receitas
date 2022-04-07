@@ -1,13 +1,13 @@
-const finishRecipe = (ID, history) => {
+const finishRecipe = (ID, history, recipeDetails) => {
   const previousLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'));
   if (previousLocalStorage) {
     localStorage.setItem('doneRecipes', JSON.stringify([...previousLocalStorage, {
-      id: ID,
+      recipeDetails,
     },
     ]));
   } else {
     localStorage.setItem('doneRecipes', JSON.stringify([{
-      id: ID,
+      recipeDetails,
     },
     ]));
   }
