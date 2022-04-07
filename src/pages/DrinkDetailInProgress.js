@@ -137,12 +137,12 @@ const DrinkDetailInProgress = ({ location: { pathname } }) => {
             {Object.values(recipeDetails.ingredients).map((ingredient, index) => (
               <label
                 className="text-muted text-lowercase"
+                data-testid={ `${index}-ingredient-step` }
                 key={ index }
                 htmlFor={ `${index + 1}` }
               >
                 <input
                   type="checkbox"
-                  data-testid={ `${index}-ingredient-step` }
                   name={ `${index + 1}` }
                   checked={ stateIngredient.cocktails[ID]
                   && stateIngredient.cocktails[ID].includes(`${index + 1}`) }

@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import { RECIPE_DETAILS_ENDPOINT } from '../helpers/enpoints';
 import useDetailsRequest from '../hooks/useDetailsRequest';
 import useSaveRecipe from '../hooks/useSaveRecipe';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-const FoodDetailInProgress = ({ location: { pathname } }) => {
+const FoodDetailInProgress = (props) => {
+  const { location: { pathname } } = props;
+  const { history } = props;
   const ID = pathname.replace(/\D/g, '');
 
   const {
@@ -29,7 +32,6 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
         },
       });
     } else if (stateIngredient.meals[ID].includes(name)) {
-      console.log('ja tem');
       setStateIngredient({
         ...stateIngredient,
         meals: {
@@ -73,6 +75,22 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
       },
       ]));
     }
+    history.push('/done-recipes');
+  };
+
+  const favoriteRecipe = () => {
+    const previousLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (previousLocalStorage) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...previousLocalStorage, {
+        id: ID,
+      },
+      ]));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([{
+        id: ID,
+      },
+      ]));
+    }
   };
 
   return (
@@ -107,12 +125,15 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
             Compartilhar
           </button>
           <button
+            className="d-flex mx-auto "
             data-testid="favorite-btn"
             type="button"
-            className="btn btn-outline-info btn-lg btn-block"
-            onClick={ () => console.log('favoritou') }
+            onClick={ favoriteRecipe }
           >
-            Favoritar
+            <img
+              src={ whiteHeartIcon }
+              alt="favorite"
+            />
           </button>
           <hr />
           <div className="d-flex flex-column align-items-center mt-3">
@@ -120,9 +141,9 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
               <label
                 key={ index }
                 htmlFor={ `${index + 1}` }
+                data-testid={ `${index}-ingredient-step` }
               >
                 <input
-                  data-testid={ `${index}-ingredient-step` }
                   name={ `${index + 1}` }
                   type="checkbox"
                   checked={ stateIngredient.meals[ID]
@@ -167,7 +188,7 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
 
 FoodDetailInProgress.propTypes = {
   location: PropTypes.objectOf(PropTypes.any).isRequired,
-
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default FoodDetailInProgress;
