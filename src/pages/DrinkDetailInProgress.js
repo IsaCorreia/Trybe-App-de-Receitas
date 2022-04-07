@@ -1,10 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import { DRINKS_DETAILS_ENDPOINT } from '../helpers/enpoints';
 import useDetailsRequest from '../hooks/useDetailsRequest';
 import useSaveRecipe from '../hooks/useSaveRecipe';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import useVerifyCheckbox from '../hooks/useVerifyCheckbox';
+import favoriteRecipe from '../helpers/favoriteRecipe';
+import finishRecipe from '../helpers/finishRecipe';
 
 const DrinkDetailInProgress = (props) => {
   const { location: { pathname } } = props;
@@ -20,6 +23,7 @@ const DrinkDetailInProgress = (props) => {
 
   useDetailsRequest(DRINKS_DETAILS_ENDPOINT(ID), setRecipeDetails, 'drinks');
   useSaveRecipe(ID, stateIngredient, setStateIngredient);
+  useVerifyCheckbox(setIsDoneButtonDisabled);
 
   const handleIngredient = ({ target: { name } }) => {
     if (stateIngredient.cocktails[ID] === undefined) {
@@ -47,49 +51,6 @@ const DrinkDetailInProgress = (props) => {
           [ID]: [...stateIngredient.cocktails[ID], name],
         },
       });
-    }
-  };
-
-  useEffect(() => {
-    const allInputs = document.getElementsByTagName('input');
-    const arrFromInputs = Array.from(allInputs);
-    const checkedInputs = arrFromInputs.filter((input) => input.checked);
-
-    if (checkedInputs.length === arrFromInputs.length && checkedInputs.length > 0) {
-      setIsDoneButtonDisabled(false);
-    } else {
-      setIsDoneButtonDisabled(true);
-    }
-  });
-
-  const finishRecipe = () => {
-    const previousLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (previousLocalStorage) {
-      localStorage.setItem('doneRecipes', JSON.stringify([...previousLocalStorage, {
-        id: ID,
-      },
-      ]));
-    } else {
-      localStorage.setItem('doneRecipes', JSON.stringify([{
-        id: ID,
-      },
-      ]));
-    }
-    history.push('/done-recipes');
-  };
-
-  const favoriteRecipe = () => {
-    const previousLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (previousLocalStorage) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...previousLocalStorage, {
-        id: ID,
-      },
-      ]));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([{
-        id: ID,
-      },
-      ]));
     }
   };
 
@@ -128,7 +89,7 @@ const DrinkDetailInProgress = (props) => {
             className="d-flex mx-auto "
             data-testid="favorite-btn"
             type="button"
-            onClick={ favoriteRecipe }
+            onClick={ () => favoriteRecipe(ID) }
           >
             <img
               src={ whiteHeartIcon }
@@ -175,7 +136,7 @@ const DrinkDetailInProgress = (props) => {
               type="button"
               data-testid="finish-recipe-btn"
               disabled={ isDoneButtonDisabled }
-              onClick={ finishRecipe }
+              onClick={ () => finishRecipe(ID, history) }
             >
               Finish Recipe
 
