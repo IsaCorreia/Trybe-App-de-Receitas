@@ -17,16 +17,22 @@ const Drinks = () => {
     setDrinksFilterRequest,
     setCurrentFilter,
     currentFilter,
+    setIsFilterByCategoryOn,
   } = useContext(RecipesContext);
 
   useClearState();
-  useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksRequest, 'drinks');
+  // useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksRequest, 'drinks');
   useRecipeInitialRequest(DRINKS_FILTER_ENDPOINT, setDrinksFilterRequest, 'drinks');
   useDrinksByCategory(DRINKS_ENDPOINT, setDrinksRequest, 'drinks');
 
-  const handleFilterClick = ({ target: { name } }) => (name === currentFilter
-    ? setCurrentFilter('All')
-    : setCurrentFilter(name));
+  const handleFilterClick = ({ target: { name } }) => {
+    setIsFilterByCategoryOn(true);
+    if (name === currentFilter) {
+      setCurrentFilter('All');
+    } else {
+      setCurrentFilter(name);
+    }
+  };
 
   return (
     <>
