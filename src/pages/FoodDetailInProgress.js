@@ -6,15 +6,15 @@ import useDetailsRequest from '../hooks/useDetailsRequest';
 import useSaveRecipe from '../hooks/useSaveRecipe';
 
 const FoodDetailInProgress = ({ location: { pathname } }) => {
-  const SEVEN = 7;
-  const TWELVE = 12;
-  const ID = pathname.slice(SEVEN, TWELVE);
+  const ID = pathname.replace(/\D/g, '');
 
   const {
     recipeDetails,
     setRecipeDetails,
     stateIngredient,
     setStateIngredient } = useContext(RecipesContext);
+
+  const [isDoneButtonDisabled, setIsDoneButtonDisabled] = useState(true);
 
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
   useSaveRecipe(ID, stateIngredient, setStateIngredient);
@@ -45,6 +45,33 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
           [ID]: [...stateIngredient.meals[ID], name],
         },
       });
+    }
+  };
+
+  useEffect(() => {
+    const allInputs = document.getElementsByTagName('input');
+    const arrFromInputs = Array.from(allInputs);
+    const checkedInputs = arrFromInputs.filter((input) => input.checked);
+
+    if (checkedInputs.length === arrFromInputs.length && checkedInputs.length > 0) {
+      setIsDoneButtonDisabled(false);
+    } else {
+      setIsDoneButtonDisabled(true);
+    }
+  });
+
+  const finishRecipe = () => {
+    const previousLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (previousLocalStorage) {
+      localStorage.setItem('doneRecipes', JSON.stringify([...previousLocalStorage, {
+        id: ID,
+      },
+      ]));
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify([{
+        id: ID,
+      },
+      ]));
     }
   };
 
@@ -91,13 +118,11 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
           <div className="d-flex flex-column align-items-center mt-3">
             {Object.values(recipeDetails.ingredients).map((ingredient, index) => (
               <label
-                className="text-muted text-lowercase"
                 key={ index }
                 htmlFor={ `${index + 1}` }
               >
                 <input
                   data-testid={ `${index}-ingredient-step` }
-                  className="ml-2 mr-2"
                   name={ `${index + 1}` }
                   type="checkbox"
                   checked={ stateIngredient.meals[ID]
@@ -114,7 +139,7 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
             <div className="w-75">
               <p
                 data-testid="instructions"
-                className="text-muted text-left"
+                className="text-muted text-left text-decoration-line-through"
               >
                 {recipeDetails.strInstructions}
 
@@ -126,6 +151,8 @@ const FoodDetailInProgress = ({ location: { pathname } }) => {
               className="btn btn-success btn btn-primary btn-lg mb-3"
               type="button"
               data-testid="finish-recipe-btn"
+              disabled={ isDoneButtonDisabled }
+              onClick={ finishRecipe }
             >
               Finish Recipe
 

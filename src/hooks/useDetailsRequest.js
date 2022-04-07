@@ -25,8 +25,8 @@ const reduceIngredients = (ingredients) => {
 const useDetailsRequest = (endpoint, setRecipe, recipe) => {
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(endpoint);
-      const data = await response.json();
+      const data = await fetch(endpoint)
+        .then((res) => res.json());
       const detailsObject = {
         ...data[recipe][0],
         ingredients: reduceIngredients(data[recipe]),

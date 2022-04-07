@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import { DRINKS_DETAILS_ENDPOINT } from '../helpers/enpoints';
 import useDetailsRequest from '../hooks/useDetailsRequest';
 import useSaveRecipe from '../hooks/useSaveRecipe';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-const DrinksDetailInProgress = ({ location: { pathname } }) => {
-  const SEVEN = 8;
-  const TWELVE = 13;
-  const ID = pathname.slice(SEVEN, TWELVE);
+const DrinkDetailInProgress = ({ location: { pathname } }) => {
+  const [isDoneButtonDisabled, setIsDoneButtonDisabled] = useState(true);
+  const ID = pathname.replace(/\D/g, '');
 
   const {
     recipeDetails,
@@ -29,7 +29,6 @@ const DrinksDetailInProgress = ({ location: { pathname } }) => {
         },
       });
     } else if (stateIngredient.cocktails[ID].includes(name)) {
-      console.log('ja tem');
       setStateIngredient({
         ...stateIngredient,
         cocktails: {
@@ -46,6 +45,48 @@ const DrinksDetailInProgress = ({ location: { pathname } }) => {
           [ID]: [...stateIngredient.cocktails[ID], name],
         },
       });
+    }
+  };
+
+  useEffect(() => {
+    const allInputs = document.getElementsByTagName('input');
+    const arrFromInputs = Array.from(allInputs);
+    const checkedInputs = arrFromInputs.filter((input) => input.checked);
+
+    if (checkedInputs.length === arrFromInputs.length && checkedInputs.length > 0) {
+      setIsDoneButtonDisabled(false);
+    } else {
+      setIsDoneButtonDisabled(true);
+    }
+  });
+
+  const finishRecipe = () => {
+    const previousLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (previousLocalStorage) {
+      localStorage.setItem('doneRecipes', JSON.stringify([...previousLocalStorage, {
+        id: ID,
+      },
+      ]));
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify([{
+        id: ID,
+      },
+      ]));
+    }
+  };
+
+  const favoriteRecipe = () => {
+    const previousLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (previousLocalStorage) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...previousLocalStorage, {
+        id: ID,
+      },
+      ]));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([{
+        id: ID,
+      },
+      ]));
     }
   };
 
@@ -81,12 +122,15 @@ const DrinksDetailInProgress = ({ location: { pathname } }) => {
             Compartilhar
           </button>
           <button
+            className="d-flex mx-auto "
             data-testid="favorite-btn"
             type="button"
-            className="btn btn-outline-info btn-lg btn-block"
-            onClick={ () => console.log('favoritou') }
+            onClick={ favoriteRecipe }
           >
-            Favoritar
+            <img
+              src={ whiteHeartIcon }
+              alt="favorite"
+            />
           </button>
           <hr />
           <div className="d-flex flex-column align-items-center mt-3">
@@ -97,13 +141,12 @@ const DrinksDetailInProgress = ({ location: { pathname } }) => {
                 htmlFor={ `${index + 1}` }
               >
                 <input
-                  data-testid={ `${index}-ingredient-step` }
-                  className="ml-2 mr-2"
-                  name={ `${index + 1}` }
                   type="checkbox"
+                  data-testid={ `${index}-ingredient-step` }
+                  name={ `${index + 1}` }
                   checked={ stateIngredient.cocktails[ID]
-                    && stateIngredient.cocktails[ID].includes(`${index + 1}`) }
-                  onChange={ (e) => handleIngredient(e) }
+                  && stateIngredient.cocktails[ID].includes(`${index + 1}`) }
+                  onChange={ handleIngredient }
                 />
                 {`${Object.keys(ingredient)[0]} - ${Object.values(ingredient)[0]}`}
               </label>
@@ -123,10 +166,13 @@ const DrinksDetailInProgress = ({ location: { pathname } }) => {
             </div>
           </div>
           <div className="d-flex justify-content-center">
+            {}
             <button
               className="btn btn-success btn btn-primary btn-lg mb-3"
               type="button"
               data-testid="finish-recipe-btn"
+              disabled={ isDoneButtonDisabled }
+              onClick={ finishRecipe }
             >
               Finish Recipe
 
@@ -139,9 +185,9 @@ const DrinksDetailInProgress = ({ location: { pathname } }) => {
   );
 };
 
-DrinksDetailInProgress.propTypes = {
+DrinkDetailInProgress.propTypes = {
   location: PropTypes.objectOf(PropTypes.any).isRequired,
 
 };
 
-export default DrinksDetailInProgress;
+export default DrinkDetailInProgress;
