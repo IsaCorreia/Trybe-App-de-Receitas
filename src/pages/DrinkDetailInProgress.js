@@ -6,9 +6,11 @@ import useDetailsRequest from '../hooks/useDetailsRequest';
 import useSaveRecipe from '../hooks/useSaveRecipe';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-const DrinkDetailInProgress = ({ location: { pathname } }) => {
-  const [isDoneButtonDisabled, setIsDoneButtonDisabled] = useState(true);
+const DrinkDetailInProgress = (props) => {
+  const { location: { pathname } } = props;
+  const { history } = props;
   const ID = pathname.replace(/\D/g, '');
+  const [isDoneButtonDisabled, setIsDoneButtonDisabled] = useState(true);
 
   const {
     recipeDetails,
@@ -73,6 +75,7 @@ const DrinkDetailInProgress = ({ location: { pathname } }) => {
       },
       ]));
     }
+    history.push('/done-recipes');
   };
 
   const favoriteRecipe = () => {
@@ -187,7 +190,7 @@ const DrinkDetailInProgress = ({ location: { pathname } }) => {
 
 DrinkDetailInProgress.propTypes = {
   location: PropTypes.objectOf(PropTypes.any).isRequired,
-
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default DrinkDetailInProgress;
