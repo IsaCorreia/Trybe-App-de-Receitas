@@ -5,15 +5,20 @@ import { RECIPE_DETAILS_ENDPOINT } from '../helpers/enpoints';
 import useDetailsRequest from '../hooks/useDetailsRequest';
 import useSaveRecipe from '../hooks/useSaveRecipe';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import favoriteRecipe from '../helpers/favoriteRecipe';
 import finishRecipe from '../helpers/finishRecipe';
 import useVerifyCheckbox from '../hooks/useVerifyCheckbox';
+// import isFavorite from '../helpers/isFavorite';
+// import useCheckForFavorite from '../hooks/useCheckForFavorite';
 
 const FoodDetailInProgress = (props) => {
   const { location: { pathname } } = props;
   const { history } = props;
   const ID = pathname.replace(/\D/g, '');
+
   const [isDoneButtonDisabled, setIsDoneButtonDisabled] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const {
     recipeDetails,
@@ -24,6 +29,7 @@ const FoodDetailInProgress = (props) => {
   useDetailsRequest(RECIPE_DETAILS_ENDPOINT(ID), setRecipeDetails, 'meals');
   useSaveRecipe(ID, stateIngredient, setStateIngredient);
   useVerifyCheckbox(setIsDoneButtonDisabled);
+  // useCheckForFavorite(ID, setFavorite, isFavorite);
 
   const handleIngredient = ({ target: { name } }) => {
     if (stateIngredient.meals[ID] === undefined) {
@@ -51,6 +57,11 @@ const FoodDetailInProgress = (props) => {
         },
       });
     }
+  };
+
+  const handleFavorite = () => {
+    const teste = favoriteRecipe(ID);
+    setIsFavorite(teste);
   };
 
   return (
@@ -88,10 +99,10 @@ const FoodDetailInProgress = (props) => {
             className="d-flex mx-auto "
             data-testid="favorite-btn"
             type="button"
-            onClick={ () => favoriteRecipe(ID) }
+            onClick={ handleFavorite }
           >
             <img
-              src={ whiteHeartIcon }
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
               alt="favorite"
             />
           </button>
