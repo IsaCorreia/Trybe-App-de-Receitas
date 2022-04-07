@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 const Header = ({ currentPage, disableSearch }) => {
   const [disableSearchInput, setDisableSearchInput] = useState(true);
@@ -41,7 +42,7 @@ const Header = ({ currentPage, disableSearch }) => {
         </Link>
       </div>
 
-      { !disableSearchInput && <input type="text" data-testid="search-input" /> }
+      { !disableSearchInput && <SearchBar /> }
 
       {/* <button type="button">Filters</button>np */}
       <hr />

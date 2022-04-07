@@ -9,11 +9,21 @@ function AppProvider({ children }) {
     password: '',
   });
 
+  const [radioValue, setRadioValue] = useState('');
+  const [inputSearchBarValue, setInputSearchBarValue] = useState('');
+  const [recipesAPI, setRecipesAPI] = useState([]);
+
   const contextValue = {
     user,
     setUser,
     isButtonDisabled,
     setIsButtonDisabled,
+    radioValue,
+    setRadioValue,
+    inputSearchBarValue,
+    setInputSearchBarValue,
+    recipesAPI,
+    setRecipesAPI,
   };
 
   return (

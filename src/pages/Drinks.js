@@ -31,6 +31,8 @@ const Drinks = () => {
   return (
     <>
       <Header currentPage="Drinks" disableSearch={ false } />
+
+      {/* <SearchBar /> */}
       <button
         data-testid="All-category-filter"
         type="button"
@@ -49,7 +51,7 @@ const Drinks = () => {
           { filter.strCategory }
         </button>))}
       <div className="card-display">
-        { drinksRequest.length > 0
+        { drinksRequest?.length > 0
       && drinksRequest.slice(0, NUMBER_OF_CARDS)
         .map((card, index) => (<ExploreRecipeCard
           linkTo={ `/drinks/${card.idDrink}` }
@@ -62,6 +64,7 @@ const Drinks = () => {
           recipeName={ card.strDrink }
         />)) }
       </div>
+
       <Footer />
     </>
   );

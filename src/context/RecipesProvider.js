@@ -8,8 +8,13 @@ function RecipesProvider({ children }) {
   const [drinksFilterRequest, setDrinksFilterRequest] = useState([]);
   const [foodRequest, setFoodRequest] = useState([]);
   const [drinksRequest, setDrinksRequest] = useState([]);
+<<<<<<< .merge_file_1g3tJR
   const [foodDetail, setFoodDetail] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
+=======
+  const [recipeDetails, setRecipeDetails] = useState({});
+
+>>>>>>> .merge_file_VroAd6
   const recipesValues = {
     foodRequest,
     setFoodRequest,
@@ -21,10 +26,15 @@ function RecipesProvider({ children }) {
     setDrinksFilterRequest,
     currentFilter,
     setCurrentFilter,
+<<<<<<< .merge_file_1g3tJR
     foodDetail,
     setFoodDetail,
     recommendations,
     setRecommendations,
+=======
+    recipeDetails,
+    setRecipeDetails,
+>>>>>>> .merge_file_VroAd6
   };
 
   return (
