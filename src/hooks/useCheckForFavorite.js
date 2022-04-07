@@ -8,7 +8,7 @@ const useCheckForFavorite = (ID, setFavorite) => {
     } else {
       setFavorite(false);
     }
-  });
+  }, [ID, setFavorite]);
 };
 
 export default useCheckForFavorite;
