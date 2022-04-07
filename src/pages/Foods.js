@@ -4,29 +4,36 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import { MEALS_ENDPOINT, MEALS_FILTER_ENDPOINT } from '../helpers/enpoints';
-import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 import useClearState from '../hooks/useClearState';
 import useFoodByCategory from '../hooks/useFoodByCategory';
+import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 
 const Foods = () => {
   const NUMBER_OF_CARDS = 12;
   const NUMBER_OF_FILTERS = 5;
+  // const history = useHistory();
   const { setFoodRequest,
     foodRequest,
     mealsFilterRequest,
     setMealsFilterRequest,
     currentFilter,
     setCurrentFilter,
+    setIsFilterByCategoryOn,
   } = useContext(RecipesContext);
 
   useClearState();
-  useRecipeInitialRequest(MEALS_ENDPOINT, setFoodRequest, 'foods');
+  // useRecipeInitialRequest(MEALS_ENDPOINT, setFoodRequest, 'foods');
   useRecipeInitialRequest(MEALS_FILTER_ENDPOINT, setMealsFilterRequest, 'meals');
   useFoodByCategory(MEALS_ENDPOINT, setFoodRequest, 'foods');
 
-  const handleFilterClick = ({ target: { name } }) => (name === currentFilter
-    ? setCurrentFilter('All')
-    : setCurrentFilter(name));
+  const handleFilterClick = ({ target: { name } }) => {
+    setIsFilterByCategoryOn(true);
+    if (name === currentFilter) {
+      setCurrentFilter('All');
+    } else {
+      setCurrentFilter(name);
+    }
+  };
 
   return (
     <>
