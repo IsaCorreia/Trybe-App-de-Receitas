@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import DoneRecipeCard from '../components/DoneRecipeCard';
+import Header from '../components/Header';
 
 export default function DoneRecipesCard() {
   const [filterByType, setFilterByType] = useState('');
 
   return (
     <div>
+      <Header currentPage="Done Recipes" disableSearch />
       <div>
         <button
           data-testid="filter-by-all-btn"
