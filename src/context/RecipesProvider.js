@@ -9,6 +9,8 @@ function RecipesProvider({ children }) {
   const [foodRequest, setFoodRequest] = useState([]);
   const [drinksRequest, setDrinksRequest] = useState([]);
   const [foodDetail, setFoodDetail] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isStartedRecipe, setIsStartedRecipe] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const [recipeDetails, setRecipeDetails] = useState({});
 
@@ -25,6 +27,10 @@ function RecipesProvider({ children }) {
     setCurrentFilter,
     foodDetail,
     setFoodDetail,
+    isFavorite,
+    setIsFavorite,
+    isStartedRecipe,
+    setIsStartedRecipe,
     recommendations,
     setRecommendations,
     recipeDetails,
