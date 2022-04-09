@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Button({
+export default function StartButton({
   handleClick,
   isDisable,
   dataTestId,
@@ -25,7 +25,7 @@ export default function Button({
   );
 }
 
-Button.defaultProps = {
+StartButton.defaultProps = {
   isDisable: false,
   type: 'button',
   src: null,
@@ -34,7 +34,7 @@ Button.defaultProps = {
   name: '',
 };
 
-Button.propTypes = {
+StartButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
   name: PropTypes.string,
   isDisable: PropTypes.bool,
