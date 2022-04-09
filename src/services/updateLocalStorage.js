@@ -9,7 +9,7 @@ const updateLocalStorage = (key, value) => {
 };
 
 const newStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
-const loadSotorage = (key) => JSON.parse(localStorage.getItem(key));
+const loadStorage = (key) => JSON.parse(localStorage.getItem(key));
 
 const filterItemById = (key, id) => {
   const oldList = JSON.parse(localStorage.getItem(key)) || [];
@@ -17,4 +17,4 @@ const filterItemById = (key, id) => {
   localStorage.setItem(key, JSON.stringify(newList));
 };
 
-export { updateLocalStorage, newStorage, filterItemById, loadSotorage };
+export { updateLocalStorage, newStorage, filterItemById, loadStorage };
