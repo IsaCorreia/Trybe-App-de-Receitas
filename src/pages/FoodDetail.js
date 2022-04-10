@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import copy from 'clipboard-copy';
+import toast, { Toaster } from 'react-hot-toast';
 import RecipeContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -106,11 +107,12 @@ const FoodDetail = () => {
 
   const copyToClipBoard = () => {
     copy(`http://localhost:3000/foods/${idMeal}`);
-    // TODO: mensagem de link copiado
+    toast.success('Link copied!');
   };
 
   return (
-    <main>
+    <>
+      <div><Toaster /></div>
       <header>
         <img src={ strMealThumb } alt={ strMeal } data-testid="recipe-photo" />
         <h1 data-testid="recipe-title">{strMeal}</h1>
@@ -197,7 +199,7 @@ const FoodDetail = () => {
         buttonName={ isStartedRecipe ? 'Continue Recipe' : 'Start Recipe' }
         handleClick={ redirect }
       />
-    </main>
+    </>
   );
 };
 
