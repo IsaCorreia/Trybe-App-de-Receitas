@@ -19,7 +19,6 @@ function RecipesProvider({ children }) {
     cocktails: {},
     meals: {},
   });
-
   const recipesValues = {
     foodRequest,
     setFoodRequest,
