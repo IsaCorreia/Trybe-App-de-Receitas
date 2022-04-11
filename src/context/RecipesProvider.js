@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
@@ -13,6 +13,7 @@ function RecipesProvider({ children }) {
   const [isStartedRecipe, setIsStartedRecipe] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const [recipeDetails, setRecipeDetails] = useState({});
+  const [ingredientsRequest, setIngredientsRequest] = useState([]);
 
   const recipesValues = {
     foodRequest,
@@ -35,6 +36,8 @@ function RecipesProvider({ children }) {
     setRecommendations,
     recipeDetails,
     setRecipeDetails,
+    ingredientsRequest,
+    setIngredientsRequest,
   };
 
   return (
