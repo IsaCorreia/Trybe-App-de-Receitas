@@ -14,6 +14,7 @@ function RecipesProvider({ children }) {
   const [recommendations, setRecommendations] = useState([]);
   const [recipeDetails, setRecipeDetails] = useState({});
   const [ingredientsRequest, setIngredientsRequest] = useState([]);
+  const [isFilterByCategoryOn, setIsFilterByCategoryOn] = useState(true);
 
   const recipesValues = {
     foodRequest,
@@ -38,6 +39,8 @@ function RecipesProvider({ children }) {
     setRecipeDetails,
     ingredientsRequest,
     setIngredientsRequest,
+    isFilterByCategoryOn,
+    setIsFilterByCategoryOn,
   };
 
   return (
