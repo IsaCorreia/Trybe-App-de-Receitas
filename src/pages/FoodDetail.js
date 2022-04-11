@@ -113,92 +113,96 @@ const FoodDetail = () => {
   return (
     <>
       <div><Toaster /></div>
-      <header>
-        <img src={ strMealThumb } alt={ strMeal } data-testid="recipe-photo" />
-        <h1 data-testid="recipe-title">{strMeal}</h1>
-      </header>
-      <div>
-        <input
-          type="image"
-          src={ shareIcon }
-          alt="Share Icon"
-          onClick={ copyToClipBoard }
-          data-testid="share-btn"
-        />
-        <input
-          name="favorite-btn"
-          type="image"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="Favorite-Icon"
-          onClick={ handleClick }
-          data-testid="favorite-btn"
-        />
-      </div>
-      <p data-testid="recipe-category">{strCategory}</p>
-      <section>
-        <h2>Ingtredients</h2>
-        <ol>
-          {reducerRecipeDetail(foodDetail).map((value, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              {value}
-            </li>
-          ))}
-        </ol>
-      </section>
-      <section>
-        <h3>Instructions</h3>
-        <p data-testid="instructions">{strInstructions}</p>
-      </section>
-      <section>
-        <div>
-          <h2>Video</h2>
-        </div>
-        <iframe
-          src={ strYoutube.replace('whatch?v=', 'embed/') }
-          data-testid="video"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="
-            accelerometer;
-            autoplay;
-            clipboard-write;
-            encrypted-media;
-            gyroscope;
-            picture-in-picture
-          "
-          allowFullScreen
-        />
-      </section>
-      <section>
-        <h2>Recommendations</h2>
-        <div>
-          {recommendations
-            ?.slice(0, MAX_RECOMMENDATIONS)
-            .map(
-              ({ strDrinkThumb, strAlcoholic, idDrink, strDrink }, index) => (
-                <Card
-                  key={ idDrink }
-                  index={ index }
-                  src={ strDrinkThumb }
-                  name={ strDrink }
-                  strType={ strAlcoholic }
-                  dataTestId={ {
-                    container: '-recommendation-card',
-                    paragraph: '-recommendation-title',
-                  } }
-                />
-              ),
-            )}
-        </div>
-      </section>
-      <StartButton
-        dataTestId="start-recipe-button"
-        buttonName={ isStartedRecipe ? 'Continue Recipe' : 'Start Recipe' }
-        handleClick={ redirect }
+      <img
+        src={ strMealThumb }
+        alt={ strMeal }
+        data-testid="recipe-photo"
       />
+      <main>
+        <h2 data-testid="recipe-title">{strMeal}</h2>
+        <div>
+          <input
+            type="image"
+            src={ shareIcon }
+            alt="Share Icon"
+            onClick={ copyToClipBoard }
+            data-testid="share-btn"
+          />
+          <input
+            name="favorite-btn"
+            type="image"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="Favorite-Icon"
+            onClick={ handleClick }
+            data-testid="favorite-btn"
+          />
+        </div>
+        <p data-testid="recipe-category">{strCategory}</p>
+        <section>
+          <h2>Ingtredients</h2>
+          <ol>
+            {reducerRecipeDetail(foodDetail).map((value, index) => (
+              <li
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {value}
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section>
+          <h3>Instructions</h3>
+          <p data-testid="instructions">{strInstructions}</p>
+        </section>
+        <section>
+          <div>
+            <h2>Video</h2>
+          </div>
+          <iframe
+            src={ strYoutube.replace('whatch?v=', 'embed/') }
+            data-testid="video"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture
+            "
+            allowFullScreen
+          />
+        </section>
+        <section>
+          <h2>Recommendations</h2>
+          <div>
+            {recommendations
+              ?.slice(0, MAX_RECOMMENDATIONS)
+              .map(
+                ({ strDrinkThumb, strAlcoholic, idDrink, strDrink }, index) => (
+                  <Card
+                    key={ idDrink }
+                    index={ index }
+                    src={ strDrinkThumb }
+                    name={ strDrink }
+                    strType={ strAlcoholic }
+                    dataTestId={ {
+                      container: '-recommendation-card',
+                      paragraph: '-recommendation-title',
+                    } }
+                  />
+                ),
+              )}
+          </div>
+        </section>
+        <StartButton
+          dataTestId="start-recipe-button"
+          buttonName={ isStartedRecipe ? 'Continue Recipe' : 'Start Recipe' }
+          handleClick={ redirect }
+        />
+      </main>
     </>
   );
 };
