@@ -34,8 +34,12 @@ const FoodDetail = () => {
   // useRecipeInitialRequest(DRINKS_RECOMMENDATIONS, setRecommendations, 'drinks');
   useEffect(() => {
     (async () => {
-      const { meals } = await getRecipes(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-      setFoodDetail(meals[0]);
+      try {
+        const { meals } = await getRecipes(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        setFoodDetail(meals[0]);
+      } catch (err) {
+        console.error(err);
+      }
     })();
     (async () => {
       const { drinks } = await getRecipes('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
@@ -65,25 +69,25 @@ const FoodDetail = () => {
     return <p>Loading...</p>;
   }
 
-  const {
-    strMealThumb,
-    strMeal,
-    strCategory,
-    strInstructions,
-    strYoutube,
-    idMeal,
-    strArea,
-  } = foodDetail;
+  // const {
+  //   strMealThumb,
+  //   strMeal,
+  //   strCategory,
+  //   strInstructions,
+  //   strYoutube,
+  //   idMeal,
+  //   strArea,
+  // } = foodDetail;
 
   const favoriteThisRecipe = () => {
     updateLocalStorage('favoriteRecipes', {
-      id: idMeal,
+      id: foodDetail.idMeal,
       type: 'food',
-      nationality: strArea,
-      category: strCategory,
+      nationality: foodDetail.strArea,
+      category: foodDetail.strCategory,
       alcoholicOrNot: '',
-      name: strMeal,
-      image: strMealThumb,
+      name: foodDetail.strMeal,
+      image: foodDetail.strMealThumb,
     });
     setIsFavorite(true);
   };
@@ -106,7 +110,7 @@ const FoodDetail = () => {
   };
 
   const copyToClipBoard = () => {
-    copy(`http://localhost:3000/foods/${idMeal}`);
+    copy(`http://localhost:3000/foods/${foodDetail.idMeal}`);
     toast.success('Link copied!');
   };
 
@@ -114,12 +118,12 @@ const FoodDetail = () => {
     <>
       <div><Toaster /></div>
       <img
-        src={ strMealThumb }
-        alt={ strMeal }
+        src={ foodDetail.strMealThumb }
+        alt={ foodDetail.strMeal }
         data-testid="recipe-photo"
       />
       <main>
-        <h2 data-testid="recipe-title">{strMeal}</h2>
+        <h2 data-testid="recipe-title">{foodDetail.strMeal}</h2>
         <div>
           <input
             type="image"
@@ -137,7 +141,7 @@ const FoodDetail = () => {
             data-testid="favorite-btn"
           />
         </div>
-        <p data-testid="recipe-category">{strCategory}</p>
+        <p data-testid="recipe-category">{foodDetail.strCategory}</p>
         <section>
           <h2>Ingtredients</h2>
           <ol>
@@ -153,14 +157,14 @@ const FoodDetail = () => {
         </section>
         <section>
           <h3>Instructions</h3>
-          <p data-testid="instructions">{strInstructions}</p>
+          <p data-testid="instructions">{foodDetail.strInstructions}</p>
         </section>
         <section>
           <div>
             <h2>Video</h2>
           </div>
           <iframe
-            src={ strYoutube.replace('whatch?v=', 'embed/') }
+            src={ foodDetail.strYoutube.replace('whatch?v=', 'embed/') }
             data-testid="video"
             title="YouTube video player"
             frameBorder="0"
