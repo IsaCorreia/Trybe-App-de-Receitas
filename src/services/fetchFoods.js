@@ -3,7 +3,7 @@ export const fetchFoodByIngredient = async (ingredient) => {
   const response = await fetch(URL_ENDPOINT_BY_INGREDIENT);
   console.log(response);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data.meals;
 };
 
@@ -12,7 +12,7 @@ export const fetchFoodByName = async (name) => {
   const response = await fetch(URL_ENDPOINT_BY_NAME);
   console.log(response);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data.meals;
 };
 
@@ -21,6 +21,13 @@ export const fetchFoodByFirstLetter = async (firstLetter) => {
   const response = await fetch(URL_ENDPOINT_BY_FIRSTLETTER);
   console.log(response);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data.meals;
+};
+
+export const getRecipes = async (endPoint) => {
+  const recipesFetched = await fetch(endPoint);
+  const recipesTreated = await recipesFetched.json();
+  // console.log('recipes treated na api', recipesTreated);
+  return recipesTreated;
 };
