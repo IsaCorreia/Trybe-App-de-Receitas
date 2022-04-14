@@ -8,8 +8,18 @@ function RecipesProvider({ children }) {
   const [drinksFilterRequest, setDrinksFilterRequest] = useState([]);
   const [foodRequest, setFoodRequest] = useState([]);
   const [drinksRequest, setDrinksRequest] = useState([]);
-  const [ingredientsRequest, setIngredientsRequest] = useState([]);
+  const [foodDetail, setFoodDetail] = useState(null);
+  const [drinkDetail, setDrinkDetail] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isStartedRecipe, setIsStartedRecipe] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
   const [recipeDetails, setRecipeDetails] = useState({});
+  const [ingredientsRequest, setIngredientsRequest] = useState([]);
+  const [isFilterByCategoryOn, setIsFilterByCategoryOn] = useState(true);
+  const [stateIngredient, setStateIngredient] = useState({
+    cocktails: {},
+    meals: {},
+  });
   const [isFilterByCategoryOn, setIsFilterByCategoryOn] = useState(true);
 
   const recipesValues = {
@@ -23,12 +33,24 @@ function RecipesProvider({ children }) {
     setDrinksFilterRequest,
     currentFilter,
     setCurrentFilter,
-    ingredientsRequest,
-    setIngredientsRequest,
+    foodDetail,
+    setFoodDetail,
+    drinkDetail,
+    setDrinkDetail,
+    isFavorite,
+    setIsFavorite,
+    isStartedRecipe,
+    setIsStartedRecipe,
+    recommendations,
+    setRecommendations,
     recipeDetails,
     setRecipeDetails,
+    ingredientsRequest,
+    setIngredientsRequest,
     isFilterByCategoryOn,
     setIsFilterByCategoryOn,
+    stateIngredient,
+    setStateIngredient,   
   };
 
   return (
