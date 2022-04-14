@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 import RecipesContext from '../context/RecipesContext';
 import { RECIPE_DETAILS_ENDPOINT } from '../helpers/enpoints';
-import useDetailsRequest from '../hooks/useDetailsRequest';
-import useSaveRecipe from '../hooks/useSaveRecipe';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import favoriteRecipe from '../helpers/favoriteRecipe';
 import finishRecipe from '../helpers/finishRecipe';
-import useVerifyCheckbox from '../hooks/useVerifyCheckbox';
-import useCheckForFavorite from '../hooks/useCheckForFavorite';
 import objectConstructor from '../helpers/objectConstructor';
+import useCheckForFavorite from '../hooks/useCheckForFavorite';
+import useDetailsRequest from '../hooks/useDetailsRequest';
+import useSaveRecipe from '../hooks/useSaveRecipe';
+import useVerifyCheckbox from '../hooks/useVerifyCheckbox';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 const FoodDetailInProgress = (props) => {
   const { location: { pathname } } = props;
@@ -19,6 +19,7 @@ const FoodDetailInProgress = (props) => {
 
   const [isDoneButtonDisabled, setIsDoneButtonDisabled] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [shareStatus, setShareStatus] = useState(false);
 
   const {
     recipeDetails,
@@ -91,17 +92,23 @@ const FoodDetailInProgress = (props) => {
             data-testid="share-btn"
             type="button"
             className="btn btn-outline-info btn-lg btn-block"
-            onClick={ () => console.log('compartilhou') }
+            onClick={ () => {
+              navigator.clipboard.writeText(
+                `http://localhost:3000/foods/${ID}`,
+              );
+              setShareStatus(true);
+            } }
           >
             Compartilhar
           </button>
+          {shareStatus && <p>Link copied!</p>}
           <button
             className="d-flex mx-auto "
-            data-testid="favorite-btn"
             type="button"
             onClick={ handleFavorite }
           >
             <img
+              data-testid="favorite-btn"
               src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
               alt="lala"
             />
