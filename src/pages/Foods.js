@@ -11,7 +11,6 @@ import useRecipeInitialRequest from '../hooks/useRecipeInitialRequest';
 const Foods = () => {
   const NUMBER_OF_CARDS = 12;
   const NUMBER_OF_FILTERS = 5;
-  // const history = useHistory();
   const { setFoodRequest,
     foodRequest,
     mealsFilterRequest,
@@ -22,7 +21,6 @@ const Foods = () => {
   } = useContext(RecipesContext);
 
   useClearState();
-  // useRecipeInitialRequest(MEALS_ENDPOINT, setFoodRequest, 'foods');
   useRecipeInitialRequest(MEALS_FILTER_ENDPOINT, setMealsFilterRequest, 'meals');
   useFoodByCategory(MEALS_ENDPOINT, setFoodRequest, 'foods');
 
@@ -38,7 +36,6 @@ const Foods = () => {
   return (
     <>
       <Header currentPage="Foods" disableSearch={ false } />
-      {/* <SearchBar /> */}
       <button
         data-testid="All-category-filter"
         type="button"
