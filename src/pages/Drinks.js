@@ -21,7 +21,6 @@ const Drinks = () => {
   } = useContext(RecipesContext);
 
   useClearState();
-  // useRecipeInitialRequest(DRINKS_ENDPOINT, setDrinksRequest, 'drinks');
   useRecipeInitialRequest(DRINKS_FILTER_ENDPOINT, setDrinksFilterRequest, 'drinks');
   useDrinksByCategory(DRINKS_ENDPOINT, setDrinksRequest, 'drinks');
 
@@ -37,8 +36,6 @@ const Drinks = () => {
   return (
     <>
       <Header currentPage="Drinks" disableSearch={ false } />
-
-      {/* <SearchBar /> */}
       <button
         data-testid="All-category-filter"
         type="button"
