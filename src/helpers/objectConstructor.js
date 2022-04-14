@@ -9,6 +9,8 @@ const objectConstructor = (recipe, recipeDetails) => {
       alcoholicOrNot: '',
       name: recipeDetails.strMeal,
       image: recipeDetails.strMealThumb,
+      doneDate: new Date().toDateString(),
+      tags: [recipeDetails.strTags],
     };
   case 'drink':
     return {
@@ -19,6 +21,8 @@ const objectConstructor = (recipe, recipeDetails) => {
       alcoholicOrNot: recipeDetails.strAlcoholic,
       name: recipeDetails.strDrink,
       image: recipeDetails.strDrinkThumb,
+      doneDate: new Date().toDateString(),
+      tags: [recipeDetails.strTags],
     };
   default:
     break;
