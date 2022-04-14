@@ -20,7 +20,6 @@ function RecipesProvider({ children }) {
     cocktails: {},
     meals: {},
   });
-  const [isFilterByCategoryOn, setIsFilterByCategoryOn] = useState(true);
 
   const recipesValues = {
     foodRequest,
@@ -50,7 +49,7 @@ function RecipesProvider({ children }) {
     isFilterByCategoryOn,
     setIsFilterByCategoryOn,
     stateIngredient,
-    setStateIngredient,   
+    setStateIngredient,
   };
 
   return (
